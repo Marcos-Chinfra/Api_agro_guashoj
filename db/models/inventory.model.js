@@ -1,6 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-const { PRODUCT_TABLE } = require('./products.model')
-const INVENTORY_TABLE = 'products';
+const { PRODUCT_TABLE } = require('./products.model');
+
+const INVENTORY_TABLE = 'Inventory';
 
 const InventorySchema = {
   id: {
@@ -9,32 +10,22 @@ const InventorySchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  product:{
-    field: 'Product_name',
+  productId:{
+    field: 'Product_id',
     allowNull:false,
     type: DataTypes.STRING,
     references: {
       model: PRODUCT_TABLE,
-      key: 'name'
+      key: 'id'
     },
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  entries:{
-    field: 'entry',
-    type: DataTypes.INTEGER,
-    references:{
-      model: PRODUCT_TABLE,
-      key: 'amount'
-    },
-    onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
-  },
-  stock: {
+  amount: {
+    field: 'stock',
     type: DataTypes.STRING,
     allowNull: false,
   },
-
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -42,3 +33,21 @@ const InventorySchema = {
     defaultValue: Sequelize.NOW,
   }
 }
+
+class Inventory extends Model{
+  static associate(models){
+    this.belongsTo(models.Product, {as: 'Product'})
+  }
+
+
+  static config(sequelize){
+    return {
+      sequelize,
+      tableName: INVENTORY_TABLE,
+      modelName: 'Inventory',
+      timestamps: false
+    }
+  }
+};
+
+module.exports = { INVENTORY_TABLE, Inventory, InventorySchema }
