@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const SALES_TABLE = 'products';
+const SALES_TABLE = 'Sales';
 
 const SalesSchema = {
   id: {
@@ -9,10 +9,20 @@ const SalesSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  name: {
-    type: DataTypes.STRING,
-    unique: true,
+  StaffId: {
+    field: 'staff_id',
     allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: SALES_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
+  },
+  description:{
+    type: DataTypes.TEXT,
+    allowNull: false
   },
   createAt: {
     allowNull: false,
@@ -27,8 +37,11 @@ const SalesSchema = {
 }
 
 class Sales extends Model{
-  static associate(){
-
+  static associate(models){
+    this.hasMany(models.SoldProducts, {
+      as: 'soldProducts',
+      foreignKey:'SaleId'
+    });
   }
 
   static config(sequelize){

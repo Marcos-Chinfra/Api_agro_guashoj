@@ -55,7 +55,7 @@ class Supplies extends Model{
   static config(sequelize){
     return {
       sequelize,
-      tableName: SUPPLY_TABLE,
+      tableName: SUPPLIES_TABLE,
       modelName: 'Supply',
       timestamps: false
     }

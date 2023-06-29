@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const { CATEGORY_TABLE } = require('./category.model');
 
-const PRODUCT_TABLE = 'products';
+const PRODUCT_TABLE = 'Products';
 
 const ProductSchema = {
   id: {
@@ -48,6 +48,10 @@ class Product extends Model {
     this.belongsTo(models.Category, {as: 'category'});
     this.hasMany(models.Supply, {
       as: 'supply',
+      foreignKey:'productId'
+    });
+    this.hasMany(models.SoldProducts, {
+      as: 'soldProducts',
       foreignKey:'productId'
     });
     this.hasOne(models.Inventory, {
