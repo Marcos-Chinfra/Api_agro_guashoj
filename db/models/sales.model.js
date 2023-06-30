@@ -1,4 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+const { STAFF_TABLE } = require('./staff.model');
 
 const SALES_TABLE = 'Sales';
 
@@ -14,7 +15,7 @@ const SalesSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
-      model: SALES_TABLE,
+      model: STAFF_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
@@ -31,17 +32,29 @@ const SalesSchema = {
     defaultValue: Sequelize.NOW
   },
   total:{
-    allowNull: false,
-    type: DataTypes.FLOAT
+    type: DataTypes.VIRTUAL,
+    get(){
+      if(this.items.length > 0){
+        return this.items.reduce((total, item) => {
+          return total + (item.price + item.OrderProduct.amount)
+        }, 0);
+      };
+      return 0;
+    }
   }
 }
 
 class Sales extends Model{
   static associate(models){
-    this.hasMany(models.SoldProducts, {
-      as: 'soldProducts',
-      foreignKey:'SaleId'
+    this.belongsTo(models.Staff, {
+      as: 'staff'
     });
+    this.belongsToMany(models.Product, {
+      as:'sold.products',
+      through: models.SoldProducts,
+      foreignKey: 'SaleId',
+      otherKey: 'productId'
+    })
   }
 
   static config(sequelize){

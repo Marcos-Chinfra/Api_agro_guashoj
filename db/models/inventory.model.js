@@ -14,7 +14,7 @@ const InventorySchema = {
   productId:{
     field: 'Product_id',
     allowNull:false,
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     references: {
       model: PRODUCT_TABLE,
       key: 'id'

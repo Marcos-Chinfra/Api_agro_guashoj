@@ -23,7 +23,7 @@ const CustomerSchema = {
 }
 
 class Customer extends Model{
-  static associate(models){
+  static associate(){
 
   }
 

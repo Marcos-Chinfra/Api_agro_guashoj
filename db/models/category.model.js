@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const CATEGORY_TABLE = 'products';
+const CATEGORY_TABLE = 'Categories';
 
 const CategorySchema = {
   id: {
@@ -25,7 +25,7 @@ const CategorySchema = {
 class Category extends Model{
   static associate(models){
     this.hasMany(models.Product, {
-      as: 'products',
+      as: 'Products',
       foreignKey:'categoryId'
     });
   }

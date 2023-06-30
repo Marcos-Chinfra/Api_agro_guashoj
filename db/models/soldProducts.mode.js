@@ -3,9 +3,15 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PRODUCT_TABLE } = require('./products.model');
 const { SALES_TABLE } = require('./sales.model');
 
-const SOLD_PRODUCTS_TABLE = 'SoldProducts';
+const SOLD_PRODUCTS_TABLE = 'sold_products';
 
 const SoldProductsSchema = {
+  id: {
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataTypes.INTEGER
+  },
   SaleId: {
     field: 'sale_id',
     allowNull: false,
@@ -28,6 +34,12 @@ const SoldProductsSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
+  createAt: {
+    allowNull: false,
+    type: DataTypes.DATE,
+    field: 'create_at',
+    defaultValue: Sequelize.NOW
+  },
   amount:{
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -35,10 +47,8 @@ const SoldProductsSchema = {
 }
 
 class SoldProducts extends Model{
-  static associate(models){
-    this.belongsTo(models.Product, {as: 'Product'})
-    this.belongsTo(models.Sales, {as: 'Sales'})
-  }
+  // static associate(){
+  // }
 
   static config(sequelize){
     return {
