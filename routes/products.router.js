@@ -50,6 +50,7 @@ router.patch('/:id',
     });
 
 router.delete('/:id',
+    validatorHandler(getProductSchema, 'params'),
     async (req, res) => {
       const { id } = req.params;
       const rta = await service.delete(id)

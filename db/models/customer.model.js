@@ -24,7 +24,6 @@ const CustomerSchema = {
 
 class Customer extends Model{
   static associate(){
-
   }
 
   static config(sequelize){

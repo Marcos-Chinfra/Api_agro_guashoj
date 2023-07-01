@@ -27,12 +27,12 @@ const ProviderSchema = {
 }
 
 class Provider extends Model{
-  static associate(models){
-    this.hasMany(models.Supply, {
-      as: 'supply',
-      foreignKey:'providerId'
-    });
-  }
+  // static associate(models){
+  //   this.hasMany(models.Supply, {
+  //     as: 'supply',
+  //     foreignKey:'providerId'
+  //   });
+  // }
 
   static config(sequelize){
     return {

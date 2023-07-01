@@ -23,12 +23,12 @@ const StaffSchema = {
 }
 
 class Staff extends Model{
-  static associate(models){
-    this.hasMany(models.Sales, {
-      as: 'sales',
-      foreignKey: 'StaffId'
-    });
-  }
+  // static associate(models){
+  //   this.hasMany(models.Sales, {
+  //     as: 'sales',
+  //     foreignKey: 'StaffId'
+  //   });
+  // }
 
   static config(sequelize){
     return {
