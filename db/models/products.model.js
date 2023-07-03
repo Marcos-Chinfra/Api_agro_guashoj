@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-//const { CATEGORY_TABLE } = require('./category.model');
+const { CATEGORY_TABLE } = require('./category.model');
 
 const PRODUCT_TABLE = 'products';
 
@@ -30,31 +30,32 @@ const ProductSchema = {
     field: 'created_at',
     defaultValue: Sequelize.NOW,
   },
-  // categoryId: {
-  //   field: 'category_id',
-  //   allowNull: false,
-  //   type: DataTypes.INTEGER,
-  //   references: {
-  //     model: CATEGORY_TABLE,
-  //     key: 'id'
-  //   },
-  //   onUpdate: 'CASCADE',
-  //   onDelete: 'SET NULL'
-  // }
+  categoryId: {
+    field: 'categoryId',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: CATEGORY_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
+  }
 }
 
 class Product extends Model {
-  // static associate(models){
-  //   this.belongsTo(models.Category, {as: 'category'})
-  //   this.hasMany(models.Supply, {
-  //     as: 'supply',
-  //     foreignKey:'productId'
-  //   })
-  //   this.hasOne(models.Inventory, {
-  //     as: 'inventory',
-  //     foreignKey:'productId'
-  //   })
-  // }
+  static associate(models){
+    this.belongsTo(models.Category, {as: 'category'})
+    this.hasOne(models.Inventory, {
+      as: 'inventory',
+      foreignKey:'productId'
+    })
+    // this.hasMany(models.Supply, {
+    //   as: 'supply',
+    //   foreignKey:'productId'
+    // })
+
+  }
 
   static config(sequelize){
     return {

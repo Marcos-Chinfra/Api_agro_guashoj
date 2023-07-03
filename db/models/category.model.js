@@ -23,12 +23,12 @@ const CategorySchema = {
 }
 
 class Category extends Model{
-  // static associate(models){
-  //   this.hasMany(models.Product, {
-  //     as: 'Products',
-  //     foreignKey:'categoryId'
-  //   });
-  // }
+  static associate(models){
+    this.hasMany(models.Product, {
+      as: 'Products',
+      foreignKey:'categoryId'
+    });
+  }
 
   static config(sequelize){
     return {

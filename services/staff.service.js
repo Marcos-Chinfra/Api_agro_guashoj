@@ -16,7 +16,9 @@ class StaffService {
   }
 
   async findOne(id) {
-    const staff = await  models.Staff.findByPk(id);
+    const staff = await  models.Staff.findByPk(id, {
+      include: ['Sales']
+    });
     if (!staff) {
       throw boom.notFound('staff not found');
     }

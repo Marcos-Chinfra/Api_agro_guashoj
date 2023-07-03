@@ -1,5 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
-//const { STAFF_TABLE } = require('./staff.model');
+const { STAFF_TABLE } = require('./staff.model');
 
 const SALES_TABLE = 'Sales';
 
@@ -10,17 +10,17 @@ const SalesSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  // StaffId: {
-  //   field: 'staff_id',
-  //   allowNull: false,
-  //   type: DataTypes.INTEGER,
-  //   references: {
-  //     model: STAFF_TABLE,
-  //     key: 'id'
-  //   },
-  //   onUpdate: 'CASCADE',
-  //   onDelete: 'SET NULL'
-  // },
+  StaffId: {
+    field: 'StaffId',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: STAFF_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
+  },
   description:{
     type: DataTypes.TEXT,
     allowNull: false
@@ -45,17 +45,17 @@ const SalesSchema = {
 }
 
 class Sales extends Model{
-  // static associate(models){
-  //   this.belongsTo(models.Staff, {
-  //     as: 'staff'
-  //   });
-  //   this.belongsToMany(models.Product, {
-  //     as:'sold.products',
-  //     through: models.SoldProducts,
-  //     foreignKey: 'SaleId',
-  //     otherKey: 'productId'
-  //   })
-  // }
+  static associate(models){
+    this.belongsTo(models.Staff, {
+      as: 'Staff'
+    });
+    // this.belongsToMany(models.Product, {
+    //   as:'sold.products',
+    //   through: models.SoldProducts,
+    //   foreignKey: 'SaleId',
+    //   otherKey: 'productId'
+    // })
+  }
 
   static config(sequelize){
     return {

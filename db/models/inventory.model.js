@@ -12,7 +12,7 @@ const InventorySchema = {
     type: DataTypes.INTEGER
   },
   productId:{
-    field: 'Product_id',
+    field: 'product_id',
     allowNull:false,
     type: DataTypes.INTEGER,
     references: {
@@ -37,7 +37,7 @@ const InventorySchema = {
 
 class Inventory extends Model{
   static associate(models){
-    this.belongsTo(models.Product, {as: 'Product'})
+    this.belongsTo(models.Product, {as: 'product'})
   }
 
 
