@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const InventoryService = require('../services/inventory.service');
-const service = new InventoryService();
+const SupplyService = require('../services/supply.service');
+const service = new SupplyService();
 
 const validatorHandler = require('../middlewares/validator.handler');
-const { createInventorySchema, updateInventorySchema, getInventorySchema } = require('../schemas/inventory.schema');
+const { createSupplySchema, updateSupplySchema, getSupplySchema } = require('../schemas/supply.schema');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id',
-  validatorHandler(getInventorySchema, 'params'),
+  validatorHandler(getSupplySchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -30,7 +30,7 @@ router.get('/:id',
 );
 
 router.post('/',
-  validatorHandler(createInventorySchema, 'body'),
+  validatorHandler(createSupplySchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
@@ -44,8 +44,8 @@ router.post('/',
 
 
 router.patch('/:id',
-  validatorHandler(getInventorySchema, 'params'),
-  validatorHandler(updateInventorySchema, 'body'),
+  validatorHandler(getSupplySchema, 'params'),
+  validatorHandler(updateSupplySchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -59,7 +59,7 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
-  validatorHandler(getInventorySchema, 'params'),
+  validatorHandler(getSupplySchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

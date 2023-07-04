@@ -1,3 +1,4 @@
+const { Inventory } = require('../db/models/inventory.model');
 const { models } = require('../libs/sequelize');
 const boom = require('@hapi/boom');
 
@@ -6,17 +7,26 @@ class SupplyService {
   constructor(){}
 
   async create(data) {
-    const newSupply = await  models.Supplies.create(data)
+    const newSupply = await  models.Supply.create(data)
+
+    const product = await models.Product.findByPk(data.productId, {
+      include: ['inventory']
+    })
+    const inventario = product.inventory;
+
+    inventario.amount += data.amount;
+    await inventario.save()
+
     return newSupply;
   }
 
   async find() {
-    const supplies = await  models.Supplies.findAll();
+    const supplies = await  models.Supply.findAll();
     return supplies;
   }
 
   async findOne(id) {
-    const supply = await  models.Supplies.findByPk(id);
+    const supply = await  models.Supply.findByPk(id);
     if (!supply) {
       throw boom.notFound('Supply not found');
     }

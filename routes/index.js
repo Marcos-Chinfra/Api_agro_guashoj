@@ -6,6 +6,9 @@ const CustomerRouter = require('./customer.router');
 const ProviderRouter = require('./provider.router');
 const SalesRouter = require('./sales.router');
 const StaffRouter = require('./staff.router');
+const InventoryRouter = require('./inventory.router');
+const SoldProductsRouter = require('./soldProducts.router');
+const SupplyRouter = require('./supply.router');
 
 function routerAPI(app){
   const router = express.Router();
@@ -16,6 +19,9 @@ function routerAPI(app){
   router.use('/provider', ProviderRouter);
   router.use('/sales', SalesRouter);
   router.use('/staff', StaffRouter);
+  router.use('/inventory', InventoryRouter);
+  router.use('/sold_products', SoldProductsRouter);
+  router.use('/supplies', SupplyRouter)
 }
 
 module.exports = routerAPI;

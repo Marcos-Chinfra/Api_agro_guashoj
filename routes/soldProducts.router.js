@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const SoldProductsService = require('../services/soldProducts.service');
-const service = SoldProductsService();
+const service = new SoldProductsService();
 
 const validatorHandler = require('../middlewares/validator.handler');
 const { createSoldProductsSchema, updateSoldProductsSchema, getSoldProductsSchema } = require('../schemas/soldProducts.schema');

@@ -2,12 +2,12 @@ const Joi = require('joi');
 
 const id = Joi.number().integer();
 const amount = Joi.number().integer();
-const productID = Joi.number().integer();
-const providerID = Joi.number().integer();
+const productId = Joi.number().integer();
+const providerId = Joi.number().integer();
 
 const createSupplySchema = Joi.object({
-  saleID: providerID.required(),
-  productID: productID.required(),
+  providerId: providerId.required(),
+  productId: productId.required(),
   amount: amount.required(),
 });
 

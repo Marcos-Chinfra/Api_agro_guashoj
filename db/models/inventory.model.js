@@ -23,8 +23,7 @@ const InventorySchema = {
     onDelete: 'SET NULL'
   },
   amount: {
-    field: 'stock',
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
   createdAt: {

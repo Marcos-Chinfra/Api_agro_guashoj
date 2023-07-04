@@ -50,10 +50,10 @@ class Product extends Model {
       as: 'inventory',
       foreignKey:'productId'
     })
-    // this.hasMany(models.Supply, {
-    //   as: 'supply',
-    //   foreignKey:'productId'
-    // })
+    this.hasMany(models.Supply, {
+      as: 'supply',
+      foreignKey:'productId'
+    })
 
   }
 
