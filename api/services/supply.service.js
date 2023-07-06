@@ -1,4 +1,3 @@
-const { Inventory } = require('../db/models/inventory.model');
 const { models } = require('../libs/sequelize');
 const boom = require('@hapi/boom');
 
