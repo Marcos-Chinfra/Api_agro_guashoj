@@ -10,7 +10,7 @@ module.exports = {
     dialect: 'postgres'
   },
   production: {
-    URI,
+    url: URI,
     dialect: 'postgres'
   }
 }

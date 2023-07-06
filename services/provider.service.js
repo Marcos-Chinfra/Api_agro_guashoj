@@ -16,7 +16,9 @@ class ProviderService{
   };
 
   async findOne(id){
-    const provider = await models.Provider.findByPk(id);
+    const provider = await models.Provider.findByPk(id,{
+      include: ['supply']
+    });
     if(!provider){
       throw boom.notFound('Provider not found');
     }

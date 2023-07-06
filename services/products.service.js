@@ -8,7 +8,9 @@ class productsService {
     const newProduct = await models.Product.create(data);
     await models.Inventory.create({
       productId: newProduct.id,
-      amount: 0
+      stock: 0,
+      incomings: 0,
+      withdrawals: 0
     });
     return newProduct;
   };

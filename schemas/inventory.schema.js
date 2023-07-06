@@ -1,16 +1,18 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const amount = Joi.number().integer();
 const productID = Joi.number().integer();
+const stock = Joi.number().integer();
+const incomings = Joi.number().integer();
+const withdrawals = Joi.number().integer();
 
 const createInventorySchema = Joi.object({
   productID: productID.required(),
-  amount: amount.required(),
+  stock: stock.required(),
 });
 
 const updateInventorySchema = Joi.object({
-  amount: amount,
+  stock: stock.required()
 });
 
 const getInventorySchema = Joi.object({

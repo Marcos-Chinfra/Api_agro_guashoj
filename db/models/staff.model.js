@@ -14,11 +14,17 @@ const StaffSchema = {
     unique: true,
     allowNull: false,
   },
-  createAt: {
+  lastName: {
+    field: 'last_name',
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+  },
+  createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'create_at',
-    defaultValue: Sequelize.NOW
+    field: 'created_at',
+    defaultValue: Sequelize.NOW,
   }
 }
 

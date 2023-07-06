@@ -22,7 +22,15 @@ const InventorySchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  amount: {
+  incomings: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  withdrawals: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  stock: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },

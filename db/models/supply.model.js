@@ -38,7 +38,7 @@ const SuppliesSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
-  createAt: {
+  createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',

@@ -14,7 +14,7 @@ const CategorySchema = {
     unique: true,
     allowNull: false,
   },
-  createAt: {
+  createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',

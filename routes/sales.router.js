@@ -5,7 +5,7 @@ const SalesService = require('../services/sales.service');
 const service = new SalesService();
 
 const validatorHandler = require('../middlewares/validator.handler.js');
-const { createSalesSchema, updateSalesSchema, getSalesSchema } = require('../schemas/sales.schema');
+const { createSalesSchema, updateSalesSchema, getSalesSchema, addSale } = require('../schemas/sales.schema');
 
 
 router.get('/',
@@ -41,6 +41,20 @@ router.post('/',
       res.status(201).json(newSale)
     }catch(err){
       next(err);
+    }
+  }
+);
+
+router.post(
+  '/add-sold-products',
+  validatorHandler(addSale, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newSale = await service.addSoldProducts(body);
+      res.status(201).json(newSale);
+    } catch (error) {
+      next(error);
     }
   }
 );

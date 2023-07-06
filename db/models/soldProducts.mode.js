@@ -34,7 +34,7 @@ const SoldProductsSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  createAt: {
+  createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',

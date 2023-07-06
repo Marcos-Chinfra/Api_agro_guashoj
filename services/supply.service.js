@@ -14,7 +14,7 @@ class SupplyService {
     })
     const inventario = product.inventory;
 
-    inventario.amount += data.amount;
+    inventario.incomings += data.amount;
     await inventario.save()
 
     return newSupply;

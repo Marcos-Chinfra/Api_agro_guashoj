@@ -25,23 +25,12 @@ const SalesSchema = {
     type: DataTypes.TEXT,
     allowNull: false
   },
-  createAt: {
+  createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',
     defaultValue: Sequelize.NOW
-  },
-  // total:{
-  //   type: DataTypes.VIRTUAL,
-  //   get(){
-  //     if(this.items.length > 0){
-  //       return this.items.reduce((total, item) => {
-  //         return total + (item.price + item.OrderProduct.amount)
-  //       }, 0);
-  //     };
-  //     return 0;
-  //   }
-  // }
+  }
 }
 
 class Sales extends Model{
@@ -49,12 +38,12 @@ class Sales extends Model{
     this.belongsTo(models.Staff, {
       as: 'Staff'
     });
-    // this.belongsToMany(models.Product, {
-    //   as:'sold.products',
-    //   through: models.SoldProducts,
-    //   foreignKey: 'SaleId',
-    //   otherKey: 'productId'
-    // })
+    this.belongsToMany(models.Product, {
+      as:'salesMade',
+      through: models.SoldProducts,
+      foreignKey: 'SaleId',
+      otherKey: 'productId'
+    })
   }
 
   static config(sequelize){

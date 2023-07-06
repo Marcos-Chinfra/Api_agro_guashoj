@@ -6,6 +6,9 @@ const { PRODUCT_TABLE, ProductSchema } = require('../models/products.model');
 const { PROVIDER_TABLE, ProviderSchema } = require('../models/providers.model');
 const { SALES_TABLE, SalesSchema } = require('../models/sales.model');
 const { STAFF_TABLE, StaffSchema } = require('../models/staff.model');
+const { INVENTORY_TABLE, InventorySchema} = require('../models/inventory.model');
+const { SOLD_PRODUCTS_TABLE, SoldProductsSchema } = require('../models/soldProducts.mode');
+const { SUPPLIES_TABLE, SuppliesSchema } = require('../models/supply.model');
 
 
 /** @type {import('sequelize-cli').Migration} */
@@ -15,8 +18,11 @@ module.exports = {
     await queryInterface.createTable(CUSTOMER_TABLE, CustomerSchema);
     await queryInterface.createTable(PRODUCT_TABLE, ProductSchema);
     await queryInterface.createTable(PROVIDER_TABLE, ProviderSchema);
-    await queryInterface.createTable(SALES_TABLE, SalesSchema);
     await queryInterface.createTable(STAFF_TABLE, StaffSchema);
+    await queryInterface.createTable(SALES_TABLE, SalesSchema);
+    await queryInterface.createTable(INVENTORY_TABLE, InventorySchema);
+    await queryInterface.createTable(SOLD_PRODUCTS_TABLE, SoldProductsSchema);
+    await queryInterface.createTable(SUPPLIES_TABLE, SuppliesSchema);
   },
 
   async down (queryInterface) {
@@ -24,22 +30,19 @@ module.exports = {
     await queryInterface.dropTable(CUSTOMER_TABLE);
     await queryInterface.dropTable(PRODUCT_TABLE);
     await queryInterface.dropTable(PROVIDER_TABLE);
-    await queryInterface.dropTable(SALES_TABLE);
     await queryInterface.dropTable(STAFF_TABLE);
+    await queryInterface.dropTable(SALES_TABLE);
+    await queryInterface.dropTable(INVENTORY_TABLE);
+    await queryInterface.dropTable(SOLD_PRODUCTS_TABLE);
+    await queryInterface.dropTable(SUPPLIES_TABLE);
   }
 };
 
-// const { INVENTORY_TABLE, InventorySchema} = require('../models/inventory.model');
-// const { SOLD_PRODUCTS_TABLE, SoldProductsSchema } = require('../models/soldProducts.mode');
-// const { SUPPLIES_TABLE, SuppliesSchema } = require('../models/supply.model');
 
-// await queryInterface.createTable(INVENTORY_TABLE, InventorySchema);
-// await queryInterface.createTable(SOLD_PRODUCTS_TABLE, SoldProductsSchema);
-// await queryInterface.createTable(SUPPLIES_TABLE, SuppliesSchema);
 
-// await queryInterface.dropTable(INVENTORY_TABLE);
-// await queryInterface.dropTable(SOLD_PRODUCTS_TABLE);
-// await queryInterface.dropTable(SUPPLIES_TABLE);
+
+
+
 
      // await queryInterface.createTable(CATEGORY_TABLE, {
     //   id: {
