@@ -11,14 +11,25 @@ const StaffSchema = {
   },
   name: {
     type: DataTypes.STRING,
-    unique: true,
     allowNull: false,
   },
   lastName: {
     field: 'last_name',
     type: DataTypes.STRING,
-    unique: true,
     allowNull: false,
+  },
+  phone: {
+    allowNull: true,
+    type: DataTypes.STRING,
+  },
+  role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    defaultValue: 'staff'
+  },
+  password: {
+    allowNull: false,
+    type: DataTypes.STRING
   },
   createdAt: {
     allowNull: false,

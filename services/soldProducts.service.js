@@ -5,10 +5,6 @@ class SoldProductsService {
 
   constructor(){}
 
-  async create(data) {
-    const newRecord = await  models.SoldProducts.create(data)
-    return newRecord;
-  }
 
   async find() {
     const records = await  models.SoldProducts.findAll();

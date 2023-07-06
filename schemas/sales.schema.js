@@ -5,7 +5,7 @@ const StaffId = Joi.number().integer();
 const description = Joi.string().min(10);
 const SaleId = Joi.number().integer();
 const productId = Joi.number().integer();
-const amount = Joi.number().integer();
+const incomings = Joi.number().integer();
 
 const createSalesSchema = Joi.object({
   description: description.required(),
@@ -23,7 +23,7 @@ const getSalesSchema = Joi.object({
 const addSale = Joi.object({
   SaleId: SaleId.required(),
   productId: productId.required(),
-  amount: amount.required()
+  incomings: incomings.required()
 })
 
 module.exports = { createSalesSchema, updateSalesSchema, getSalesSchema, addSale }

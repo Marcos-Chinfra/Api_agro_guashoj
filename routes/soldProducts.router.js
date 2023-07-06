@@ -5,7 +5,7 @@ const SoldProductsService = require('../services/soldProducts.service');
 const service = new SoldProductsService();
 
 const validatorHandler = require('../middlewares/validator.handler');
-const { createSoldProductsSchema, updateSoldProductsSchema, getSoldProductsSchema } = require('../schemas/soldProducts.schema');
+const { updateSoldProductsSchema, getSoldProductsSchema } = require('../schemas/soldProducts.schema');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -23,19 +23,6 @@ router.get('/:id',
       const { id } = req.params;
       const record = await service.findOne(id);
       res.json(record);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
-router.post('/',
-  validatorHandler(createSoldProductsSchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const body = req.body;
-      const newRecord = await service.create(body);
-      res.status(201).json(newRecord);
     } catch (error) {
       next(error);
     }
