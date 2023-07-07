@@ -1,11 +1,17 @@
 const { Pool } = require('pg');
 
-const pool = new Pool({
-  host: 'localhost',
-  'port': 5432,
-  user: 'marcos',
-  password: 'ares18',
-  database: 'postgres'
-  });
+const { config } = require('./../config/config');
+
+const options = {
+  connectionString: config.dbUrl
+};
+
+if (config.isProd) {
+  options.ssl =  {
+    rejectUnauthorized: false
+  };
+}
+
+const pool = new Pool(options);
 
 module.exports = pool;
