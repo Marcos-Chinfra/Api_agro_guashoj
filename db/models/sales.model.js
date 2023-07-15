@@ -1,5 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 const { STAFF_TABLE } = require('./staff.model');
+const { ROUTES_TABLE } = require('./routes.model');
 
 const SALES_TABLE = 'Sales';
 
@@ -21,9 +22,25 @@ const SalesSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  description:{
+  RouteId: {
+    field: 'RouteId',
+    allowNull: false,
+    type: DataTypes.INTEGER,
+    references: {
+      model: ROUTES_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
+  },
+  total:{
+    allowNull: false,
+    type: DataTypes.INTEGER,
+  },
+  observations:{
     type: DataTypes.TEXT,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 'Ninguna'
   },
   createdAt: {
     allowNull: false,
@@ -38,11 +55,20 @@ class Sales extends Model{
     this.belongsTo(models.Staff, {
       as: 'Staff'
     });
-    this.belongsToMany(models.Product, {
-      as:'salesMade',
-      through: models.SoldProducts,
-      foreignKey: 'SaleId',
-      otherKey: 'productId'
+    this.belongsTo(models.Routes, {
+      as: 'Route'
+    });
+    this.hasMany(models.ReturnedProducts,{
+      as: 'ReturnedProducts',
+      foreignKey: 'SaleId'
+    });
+    this.hasMany(models.SoldProducts, {
+      as: 'SoldProducts',
+      foreignKey: "SaleId"
+    });
+    this.hasMany(models.UnsoldProducts, {
+      as: 'UnsoldProducts',
+      foreignKey: "SaleId"
     })
   }
 

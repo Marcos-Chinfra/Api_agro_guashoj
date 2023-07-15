@@ -6,7 +6,11 @@ const { Provider, ProviderSchema } = require('./providers.model');
 const { Sales, SalesSchema } = require('./sales.model');
 const { SoldProducts, SoldProductsSchema } = require('./soldProducts.mode');
 const { Staff, StaffSchema } = require('./staff.model');
-const { Supplies, SuppliesSchema } = require('./supply.model')
+const { Supplies, SuppliesSchema } = require('./supply.model');
+const { GoodsInTransit, GoodsInTransitSchema } = require('./goodsInTransit.model');
+const { ReturnedProducts, ReturnedProductsSchema } = require('./returnedProducts.model');
+const { Routes, RoutesSchema  } = require('./routes.model');
+const { UnsoldProducts, UnsoldProductsSchema } = require('./unsoldProducts.model');
 
 
 function setupModels(sequelize) {
@@ -18,7 +22,11 @@ function setupModels(sequelize) {
   Sales.init(SalesSchema, Sales.config(sequelize));
   SoldProducts.init(SoldProductsSchema, SoldProducts.config(sequelize));
   Staff.init(StaffSchema, Staff.config(sequelize));
-  Supplies.init(SuppliesSchema, Supplies.config(sequelize))
+  Supplies.init(SuppliesSchema, Supplies.config(sequelize));
+  GoodsInTransit.init(GoodsInTransitSchema, GoodsInTransit.config(sequelize));
+  ReturnedProducts.init(ReturnedProductsSchema, ReturnedProducts.config(sequelize));
+  Routes.init(RoutesSchema, Routes.config(sequelize));
+  UnsoldProducts.init(UnsoldProductsSchema, UnsoldProducts.config(sequelize));
 
 
   Category.associate(sequelize.models);

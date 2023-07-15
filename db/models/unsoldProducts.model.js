@@ -3,9 +3,9 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PRODUCT_TABLE } = require('./products.model');
 const { SALES_TABLE } = require('./sales.model');
 
-const SOLD_PRODUCTS_TABLE = 'sold_products';
+const UNSOLD_PRODUCTS_TABLE = 'unsold_products';
 
-const SoldProductsSchema = {
+const UnsoldProductsSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -46,7 +46,7 @@ const SoldProductsSchema = {
   }
 }
 
-class SoldProducts extends Model{
+class UnsoldProducts extends Model{
   static associate(models){
     this.belongsTo(models.Sales, {as: 'sales'});
     this.belongsTo(models.Product, {as: 'Product'});
@@ -55,11 +55,11 @@ class SoldProducts extends Model{
   static config(sequelize){
     return {
       sequelize,
-      tableName: SOLD_PRODUCTS_TABLE,
-      modelName: 'SoldProducts',
+      tableName: UNSOLD_PRODUCTS_TABLE,
+      modelName: 'UnsoldProducts',
       timestamps: false
     }
   }
 };
 
-module.exports = { SOLD_PRODUCTS_TABLE, SoldProducts, SoldProductsSchema }
+module.exports = { UNSOLD_PRODUCTS_TABLE, UnsoldProductsSchema, UnsoldProducts }

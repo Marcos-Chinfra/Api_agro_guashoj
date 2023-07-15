@@ -1,23 +1,31 @@
-const { where } = require('sequelize');
 const { models } = require('../libs/sequelize');
 const boom = require('@hapi/boom');
 
-class InventoryService {
+class GoodsInTransitService {
 
   constructor(){}
 
   async create(data) {
-    const newRecord = await  models.Inventory.create(data)
-    return newRecord;
+    const newGoodInTransit= await  models.GoodsInTransit.create(data);
+
+    const product = await models.Product.findByPk(data.productId, {
+      include: ['inventory']
+    });
+    const inventario = product.inventory;
+
+    inventario.withdrawals += data.amount;
+    await inventario.save();
+
+    return newGoodInTransit;
   }
 
   async find() {
-    const records = await  models.Inventory.findAll();
+    const records = await  models.GoodsInTransit.findAll();
     return records;
   }
 
   async findOne(id) {
-    const record = await  models.Inventory.findByPk(id);
+    const record = await  models.GoodsInTransit.findByPk(id);
     if (!record) {
       throw boom.notFound('record not found');
     }
@@ -30,19 +38,6 @@ class InventoryService {
     return rta;
   }
 
-  async updateIncomings(id, changes){
-  const product = await models.Inventory.findOne({
-    where: {
-      productId: id
-    }
-  });
-
-  product.incomings += changes.incomings
-
-  const rta = await product.save();
-  return rta
-  }
-
   async delete(id) {
     const model = await this.findOne(id);
     await model.destroy();
@@ -51,4 +46,4 @@ class InventoryService {
 
 }
 
-module.exports = InventoryService;
+module.exports = GoodsInTransitService;

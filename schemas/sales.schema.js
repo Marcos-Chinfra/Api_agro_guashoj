@@ -2,28 +2,27 @@ const Joi = require('joi');
 
 const id = Joi.number().integer();
 const StaffId = Joi.number().integer();
-const description = Joi.string().min(10);
-const SaleId = Joi.number().integer();
-const productId = Joi.number().integer();
-const incomings = Joi.number().integer();
+const RouteId = Joi.number().integer();
+const observations = Joi.string().min(10);
+const total = Joi.number()
+
 
 const createSalesSchema = Joi.object({
-  description: description.required(),
-  StaffId: StaffId.required()
+  observations: observations.required(),
+  StaffId: StaffId.required(),
+  RouteId: RouteId.required(),
+  total: total
 });
 
 const updateSalesSchema = Joi.object({
-  description: description,
+  observations: observations,
+  StaffId: StaffId,
+  RouteId: RouteId,
+  total: total
 });
 
 const getSalesSchema = Joi.object({
-  id: id.required(),
+  id: id.required()
 });
 
-const addSale = Joi.object({
-  SaleId: SaleId.required(),
-  productId: productId.required(),
-  incomings: incomings.required()
-})
-
-module.exports = { createSalesSchema, updateSalesSchema, getSalesSchema, addSale }
+module.exports = { createSalesSchema, updateSalesSchema, getSalesSchema }

@@ -13,8 +13,7 @@ const ProductSchema = {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false,
-    unique: true
+    allowNull: false
   },
   description: {
     type: DataTypes.TEXT,
@@ -23,6 +22,18 @@ const ProductSchema = {
   price: {
     type: DataTypes.FLOAT,
     allowNull: false,
+  },
+  type: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  weight: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  unit_of_measurement:{
+    type: DataTypes.STRING,
+    allowNull: false
   },
   createdAt: {
     allowNull: false,
@@ -50,6 +61,22 @@ class Product extends Model {
       as: 'inventory',
       foreignKey:'productId'
     })
+    this.hasMany(models.ReturnedProducts,{
+      as: 'ReturnedProducts',
+      foreignKey: 'productId'
+    });
+    this.hasMany(models.SoldProducts, {
+      as: 'SoldProducts',
+      foreignKey: "productId"
+    });
+    this.hasMany(models.UnsoldProducts, {
+      as: 'UnsoldProducts',
+      foreignKey: "productId"
+    });
+    this.hasMany(models.GoodsInTransit, {
+      as: 'GoodsInTransit',
+      foreignKey: "productId"
+    });
     this.hasMany(models.Supply, {
       as: 'supply',
       foreignKey:'productId'

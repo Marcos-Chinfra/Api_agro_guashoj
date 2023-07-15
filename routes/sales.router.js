@@ -45,20 +45,6 @@ router.post('/',
   }
 );
 
-router.post(
-  '/add-sold-products',
-  validatorHandler(addSale, 'body'),
-  async (req, res, next) => {
-    try {
-      const body = req.body;
-      const newSale = await service.addSoldProducts(body);
-      res.status(201).json(newSale);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
 router.patch('/:id',
   validatorHandler(getSalesSchema, 'params'),
   validatorHandler(updateSalesSchema, 'body'),

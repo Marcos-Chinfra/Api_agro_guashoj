@@ -10,20 +10,20 @@ class SalesService {
     return newSale;
   }
 
-  async addSoldProducts(data) {
-    const newCollection = await  models.SoldProducts.create(data);
+  // async addSoldProducts(data) {
+  //   const newCollection = await  models.SoldProducts.create(data);
 
-    const product = await models.Product.findByPk(data.productId, {
-      include: ['inventory']
-    })
-    const inventory = product.inventory;
+  //   const product = await models.Product.findByPk(data.productId, {
+  //     include: ['inventory']
+  //   })
+  //   const inventory = product.inventory;
 
-    inventory.withdrawals += data.amount;
-    await inventory.save()
+  //   inventory.withdrawals += data.amount;
+  //   await inventory.save()
 
 
-    return newCollection;
-  }
+  //   return newCollection;
+  // }
 
   async find() {
     const sales = await  models.Sales.findAll();
@@ -32,7 +32,7 @@ class SalesService {
 
   async findOne(id) {
     const sale = await  models.Sales.findByPk(id, {
-      include: ['Staff', 'salesMade']
+      include: ['Staff', 'Route']
     });
     if (!sale) {
       throw boom.notFound('sale not found');

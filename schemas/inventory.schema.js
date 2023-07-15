@@ -12,7 +12,8 @@ const createInventorySchema = Joi.object({
 });
 
 const updateInventorySchema = Joi.object({
-  stock: stock.required()
+  id: id,
+  incomings: incomings,
 });
 
 const getInventorySchema = Joi.object({

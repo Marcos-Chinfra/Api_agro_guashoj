@@ -6,21 +6,21 @@ const productId = Joi.number().integer();
 const amount = Joi.number().integer();
 
 
-const createSoldProductsSchema = Joi.object({
+const createUnsoldProductsSchema = Joi.object({
   amount: amount.required(),
   SaleId: SaleId.required(),
-  productId: productId.required(),
+  productId: productId.required()
 });
 
-
-const updateSoldProductsSchema = Joi.object({
+const updateUnsoldProductsSchema = Joi.object({
   amount: amount,
   SaleId: SaleId,
   productId: productId
 });
 
-const getSoldProductsSchema = Joi.object({
-  id: id.required(),
+const getUnsoldProductsSchema = Joi.object({
+  id: id.required()
 });
 
-module.exports = { createSoldProductsSchema, updateSoldProductsSchema, getSoldProductsSchema }
+module.exports = { createUnsoldProductsSchema, updateUnsoldProductsSchema, getUnsoldProductsSchema }
+

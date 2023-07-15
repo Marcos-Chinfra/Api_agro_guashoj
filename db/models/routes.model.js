@@ -1,8 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const STAFF_TABLE = 'Staff';
+const ROUTES_TABLE = 'routes';
 
-const StaffSchema = {
+const RoutesSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -13,48 +13,34 @@ const StaffSchema = {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  lastName: {
-    field: 'last_name',
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  phone: {
-    allowNull: true,
-    type: DataTypes.STRING,
-  },
-  role: {
-    allowNull: false,
-    type: DataTypes.STRING,
-    defaultValue: 'staff'
-  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
-    defaultValue: Sequelize.NOW,
+    field: 'create_at',
+    defaultValue: Sequelize.NOW
   }
 }
 
-class Staff extends Model{
+class Routes extends Model{
   static associate(models){
     this.hasMany(models.Sales, {
       as: 'Sales',
-      foreignKey: 'StaffId'
+      foreignKey: 'RoutesId'
     });
     this.hasMany(models.GoodsInTransit, {
       as: 'GoodsInTransit',
-      foreignKey: "StaffId"
+      foreignKey: "RoutesId"
     });
   }
 
   static config(sequelize){
     return {
       sequelize,
-      tableName: STAFF_TABLE,
-      modelName: 'Staff',
+      tableName: ROUTES_TABLE,
+      modelName: 'Routes',
       timestamps: false
     }
   }
 };
 
-module.exports = { STAFF_TABLE, Staff, StaffSchema }
+module.exports = { ROUTES_TABLE, Routes, RoutesSchema }

@@ -5,17 +5,22 @@ class SupplyService {
 
   constructor(){}
 
+  // async create(data) {
+  //   const newSupply = await  models.Supply.create(data)
+
+  //   const product = await models.Product.findByPk(data.productId, {
+  //     include: ['inventory']
+  //   })
+  //   const inventario = product.inventory;
+
+  //   inventario.incomings += data.amount;
+  //   await inventario.save()
+
+  //   return newSupply;
+  // }
+
   async create(data) {
     const newSupply = await  models.Supply.create(data)
-
-    const product = await models.Product.findByPk(data.productId, {
-      include: ['inventory']
-    })
-    const inventario = product.inventory;
-
-    inventario.incomings += data.amount;
-    await inventario.save()
-
     return newSupply;
   }
 

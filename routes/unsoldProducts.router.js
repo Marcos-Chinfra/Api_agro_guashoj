@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const InventoryService = require('../services/inventory.service');
-const service = new InventoryService();
+const UnsoldProductsService = require('../services/unsoldProducts.service');
+const service = new UnsoldProductsService();
 
 const validatorHandler = require('../middlewares/validator.handler');
-const { createInventorySchema, updateInventorySchema, getInventorySchema } = require('../schemas/inventory.schema');
+const { updateUnsoldProductsSchema, createUnsoldProductsSchema, getUnsoldProductsSchema } = require('../schemas/unsoldProducts.schema');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/:id',
-  validatorHandler(getInventorySchema, 'params'),
+  validatorHandler(getUnsoldProductsSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -30,22 +30,22 @@ router.get('/:id',
 );
 
 router.post('/',
-  validatorHandler(createInventorySchema, 'body'),
+  validatorHandler(createUnsoldProductsSchema, 'body'),
   async (req, res, next) => {
-    try {
+    try{
       const body = req.body;
       const newRecord = await service.create(body);
-      res.status(201).json(newRecord);
-    } catch (error) {
-      next(error);
+      res.status(201).json(newRecord)
+    }catch(err){
+      next(err);
     }
   }
 );
 
 
 router.patch('/:id',
-  validatorHandler(getInventorySchema, 'params'),
-  validatorHandler(updateInventorySchema, 'body'),
+  validatorHandler(getUnsoldProductsSchema, 'params'),
+  validatorHandler(updateUnsoldProductsSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
@@ -58,24 +58,8 @@ router.patch('/:id',
   }
 );
 
-
-router.patch('/product-update/:id',
-  validatorHandler(getInventorySchema, 'params'),
-  validatorHandler(updateInventorySchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const record = await service.updateIncomings(id, body);
-      res.json(record);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
 router.delete('/:id',
-  validatorHandler(getInventorySchema, 'params'),
+  validatorHandler(getUnsoldProductsSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
