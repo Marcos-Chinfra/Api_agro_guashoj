@@ -1,11 +1,10 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const { PRODUCT_TABLE } = require('./products.model');
-const { SALES_TABLE } = require('./sales.model');
 
-const SOLD_PRODUCTS_TABLE = 'Sold_products';
+const SHIFT_OUTPUT_TABLE = 'shift_output';
 
-const SoldProductsSchema = {
+const ShiftOutputSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -23,20 +22,14 @@ const SoldProductsSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  SaleId: {
-    field: 'sale_id',
-    allowNull: false,
-    type: DataTypes.INTEGER,
-    references: {
-      model: SALES_TABLE,
-      key: 'id'
-    },
-    onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
-  },
   amount:{
     allowNull: false,
     type: DataTypes.INTEGER,
+  },
+  workingDay: {
+    field: 'working_day',
+    type: DataTypes.ENUM('mañana', 'tarde'),
+    allowNull: false
   },
   createdAt: {
     allowNull: false,
@@ -46,20 +39,19 @@ const SoldProductsSchema = {
   }
 }
 
-class SoldProducts extends Model{
+class ShiftOutput extends Model{
   static associate(models){
-    this.belongsTo(models.Sales, {as: 'sales'});
-    this.belongsTo(models.Product, {as: 'Product'});
+    this.belongsTo(models.Product, {as: 'product'});
   }
 
   static config(sequelize){
     return {
       sequelize,
-      tableName: SOLD_PRODUCTS_TABLE,
-      modelName: 'SoldProducts',
+      tableName: SHIFT_OUTPUT_TABLE,
+      modelName: 'ShiftOutput',
       timestamps: false
     }
   }
 };
 
-module.exports = { SOLD_PRODUCTS_TABLE, SoldProducts, SoldProductsSchema }
+module.exports = { SHIFT_OUTPUT_TABLE, ShiftOutput, ShiftOutputSchema }

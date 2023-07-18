@@ -12,6 +12,7 @@ const { GOODS_IN_TRANSIT_TABLE, GoodsInTransitSchema } = require('../models/good
 const { RETURNED_PRODUCTS_TABLE, ReturnedProductsSchema } = require('../models/returnedProducts.model');
 const { ROUTES_TABLE, RoutesSchema } = require('../models/routes.model');
 const { UNSOLD_PRODUCTS_TABLE, UnsoldProductsSchema } = require('../models/unsoldProducts.model');
+const { SHIFT_OUTPUT_TABLE, ShiftOutputSchema } = require('../models/shiftOutput.model');
 
 
 /** @type {import('sequelize-cli').Migration} */
@@ -29,6 +30,7 @@ module.exports = {
     await queryInterface.createTable(GOODS_IN_TRANSIT_TABLE, GoodsInTransitSchema);
     await queryInterface.createTable(RETURNED_PRODUCTS_TABLE, ReturnedProductsSchema);
     await queryInterface.createTable(UNSOLD_PRODUCTS_TABLE, UnsoldProductsSchema);
+    await queryInterface.createTable(SHIFT_OUTPUT_TABLE, ShiftOutputSchema);
   },
 
   async down (queryInterface) {
@@ -44,5 +46,6 @@ module.exports = {
     await queryInterface.dropTable(GOODS_IN_TRANSIT_TABLE);
     await queryInterface.dropTable(RETURNED_PRODUCTS_TABLE);
     await queryInterface.dropTable(UNSOLD_PRODUCTS_TABLE);
+    await queryInterface.dropTable(SHIFT_OUTPUT_TABLE);
   }
 };

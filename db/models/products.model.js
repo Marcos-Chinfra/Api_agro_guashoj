@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const { CATEGORY_TABLE } = require('./category.model');
 
-const PRODUCT_TABLE = 'products';
+const PRODUCT_TABLE = 'Products';
 
 const ProductSchema = {
   id: {
@@ -77,8 +77,8 @@ class Product extends Model {
       as: 'GoodsInTransit',
       foreignKey: "productId"
     });
-    this.hasMany(models.Supply, {
-      as: 'supply',
+    this.hasMany(models.ShiftOutputSchema, {
+      as: 'ShiftOutput',
       foreignKey:'productId'
     })
 

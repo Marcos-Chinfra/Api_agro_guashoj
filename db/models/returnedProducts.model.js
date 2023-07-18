@@ -3,7 +3,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PRODUCT_TABLE } = require('./products.model');
 const { SALES_TABLE } = require('./sales.model');
 
-const RETURNED_PRODUCTS_TABLE = 'returned_products';
+const RETURNED_PRODUCTS_TABLE = 'Returned_products';
 
 const ReturnedProductsSchema = {
   id: {
@@ -24,7 +24,7 @@ const ReturnedProductsSchema = {
     onDelete: 'SET NULL'
   },
   SaleId: {
-    field: 'sale_id',
+    field: 'saleI_d',
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {

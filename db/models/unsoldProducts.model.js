@@ -3,7 +3,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 const { PRODUCT_TABLE } = require('./products.model');
 const { SALES_TABLE } = require('./sales.model');
 
-const UNSOLD_PRODUCTS_TABLE = 'unsold_products';
+const UNSOLD_PRODUCTS_TABLE = 'Unsold_products';
 
 const UnsoldProductsSchema = {
   id: {

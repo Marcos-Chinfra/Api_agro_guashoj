@@ -34,13 +34,38 @@ class GoodsInTransitService {
 
   async update(id, changes) {
     const record = await this.findOne(id);
+
+    const product = await models.Product.findByPk(record.productId, {
+      include: ['inventory']
+    });
+    const inventario = product.inventory;
+
+    if(record.amount > changes.amount){
+      const y = record.amount - changes.amount;
+      inventario.withdrawals -= y
+      await inventario.save();
+    } else {
+      const y = changes.amount - record.amount ;
+      inventario.withdrawals += y
+      await inventario.save();
+    }
+
     const rta = await record.update(changes);
     return rta;
   }
 
   async delete(id) {
-    const model = await this.findOne(id);
-    await model.destroy();
+    const record = await this.findOne(id);
+
+    const product = await models.Product.findByPk(record.productId, {
+      include: ['inventory']
+    });
+    const inventario = product.inventory;
+
+    inventario.withdrawals -= record.amount;
+    await inventario.save();
+
+    await record.destroy();
     return { rta: true };
   }
 

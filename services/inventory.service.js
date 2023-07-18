@@ -12,7 +12,9 @@ class InventoryService {
   }
 
   async find() {
-    const records = await  models.Inventory.findAll();
+    const records = await  models.Inventory.findAll({
+      include: ['product']
+    });
     return records;
   }
 
@@ -30,18 +32,18 @@ class InventoryService {
     return rta;
   }
 
-  async updateIncomings(id, changes){
-  const product = await models.Inventory.findOne({
-    where: {
-      productId: id
-    }
-  });
+  // async updateIncomings(id, changes){
+  // const product = await models.Inventory.findOne({
+  //   where: {
+  //     productId: id
+  //   }
+  // });
 
-  product.incomings += changes.incomings
+  // product.incomings += changes.incomings
 
-  const rta = await product.save();
-  return rta
-  }
+  // const rta = await product.save();
+  // return rta
+  // }
 
   async delete(id) {
     const model = await this.findOne(id);

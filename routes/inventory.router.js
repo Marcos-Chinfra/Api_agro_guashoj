@@ -58,21 +58,20 @@ router.patch('/:id',
   }
 );
 
-
-router.patch('/product-update/:id',
-  validatorHandler(getInventorySchema, 'params'),
-  validatorHandler(updateInventorySchema, 'body'),
-  async (req, res, next) => {
-    try {
-      const { id } = req.params;
-      const body = req.body;
-      const record = await service.updateIncomings(id, body);
-      res.json(record);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
+// router.patch('/product-update/:id',
+//   validatorHandler(getInventorySchema, 'params'),
+//   validatorHandler(updateInventorySchema, 'body'),
+//   async (req, res, next) => {
+//     try {
+//       const { id } = req.params;
+//       const body = req.body;
+//       const record = await service.updateIncomings(id, body);
+//       res.json(record);
+//     } catch (error) {
+//       next(error);
+//     }
+//   }
+// );
 
 router.delete('/:id',
   validatorHandler(getInventorySchema, 'params'),

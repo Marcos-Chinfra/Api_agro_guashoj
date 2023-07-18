@@ -1,6 +1,5 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const { PRODUCT_TABLE } = require('./products.model');
 const { PROVIDER_TABLE } = require('./providers.model');
 
 const SUPPLIES_TABLE = 'Supplies';
@@ -12,16 +11,10 @@ const SuppliesSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  productId: {
-    field: 'product_id',
+  product: {
+    type: DataTypes.STRING,
     allowNull: false,
-    type: DataTypes.INTEGER,
-    references: {
-      model: PRODUCT_TABLE,
-      key: 'id'
-    },
-    onUpdate: 'CASCADE',
-    onDelete: 'SET NULL'
+    defaultValue: 'Leche'
   },
   providerId: {
     field: 'provider_id',
@@ -38,6 +31,15 @@ const SuppliesSchema = {
     allowNull: false,
     type: DataTypes.INTEGER,
   },
+  unit_of_measurement:{
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  workingDay: {
+    field: 'working_day',
+    type: DataTypes.ENUM('mañana', 'tarde'),
+    allowNull: false
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -48,7 +50,6 @@ const SuppliesSchema = {
 
 class Supplies extends Model{
   static associate(models){
-    this.belongsTo(models.Product, {as: 'product'});
     this.belongsTo(models.Provider, {as: 'provider'});
   }
 

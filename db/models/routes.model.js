@@ -1,6 +1,6 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const ROUTES_TABLE = 'routes';
+const ROUTES_TABLE = 'Routes';
 
 const RoutesSchema = {
   id: {
@@ -25,11 +25,11 @@ class Routes extends Model{
   static associate(models){
     this.hasMany(models.Sales, {
       as: 'Sales',
-      foreignKey: 'RoutesId'
+      foreignKey: 'RouteId'
     });
     this.hasMany(models.GoodsInTransit, {
       as: 'GoodsInTransit',
-      foreignKey: "RoutesId"
+      foreignKey: "RouteId"
     });
   }
 

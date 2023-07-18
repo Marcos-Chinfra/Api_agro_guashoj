@@ -4,7 +4,7 @@ const { PRODUCT_TABLE } = require('./products.model');
 const { STAFF_TABLE } = require('./staff.model');
 const { ROUTES_TABLE } = require('./routes.model');
 
-const GOODS_IN_TRANSIT_TABLE = 'returned_products';
+const GOODS_IN_TRANSIT_TABLE = 'Goods_in_transit_products';
 
 const GoodsInTransitSchema = {
   id: {
@@ -61,8 +61,8 @@ const GoodsInTransitSchema = {
 class GoodsInTransit extends Model{
   static associate(models){
     this.belongsTo(models.Product , {as: 'product'});
-    this.belongsTo(models.Staff , {as: 'staff'});
-    this.belongsTo(models.Routes , {as: 'routes'});
+    this.belongsTo(models.Staff , {as: 'Staff'});
+    this.belongsTo(models.Routes , {as: 'Route'});
   }
 
   static config(sequelize){
