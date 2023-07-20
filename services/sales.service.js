@@ -32,7 +32,7 @@ class SalesService {
 
   async findOne(id) {
     const sale = await  models.Sales.findByPk(id, {
-      include: ['Staff', 'Route', 'SoldProducts', 'ReturnedProducts', 'UnsoldProducts']
+      include: ['staff', 'route', 'SoldProducts', 'ReturnedProducts', 'UnsoldProducts', 'GoodsInTransit']
     });
     if (!sale) {
       throw boom.notFound('sale not found');

@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const id = Joi.number().integer();
-const name = Joi.string().min(3).max(20);
+const name = Joi.string().min(3).max(50);
 const price = Joi.number();
 const description = Joi.string().min(10);
 const categoryId = Joi.number().integer();

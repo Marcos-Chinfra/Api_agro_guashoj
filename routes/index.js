@@ -12,6 +12,7 @@ const returnedProductsRouter = require('./returnedProducts.router');
 const unsoldProductsRouter = require('./unsoldProducts.router');
 const routesRouter = require('./routes.router');
 const goodsInTransitRouter = require('./goodsInTransit.router');
+const shiftOutputRouter = require('./shiftOutput.router');
 
 
 function routerApi(app) {
@@ -29,6 +30,7 @@ function routerApi(app) {
   router.use('/returned-products', returnedProductsRouter);
   router.use('/goods-in-transit', goodsInTransitRouter);
   router.use('/routes', routesRouter);
+  router.use('/shift-output', shiftOutputRouter);
 }
 
 module.exports = routerApi;

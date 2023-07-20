@@ -25,11 +25,7 @@ class Routes extends Model{
   static associate(models){
     this.hasMany(models.Sales, {
       as: 'Sales',
-      foreignKey: 'RouteId'
-    });
-    this.hasMany(models.GoodsInTransit, {
-      as: 'GoodsInTransit',
-      foreignKey: "RouteId"
+      foreignKey: 'routeId'
     });
   }
 

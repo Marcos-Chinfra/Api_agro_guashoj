@@ -2,9 +2,9 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const { PRODUCT_TABLE } = require('./products.model');
 const { STAFF_TABLE } = require('./staff.model');
-const { ROUTES_TABLE } = require('./routes.model');
+const { SALES_TABLE } = require('./sales.model');
 
-const GOODS_IN_TRANSIT_TABLE = 'Goods_in_transit_products';
+const GOODS_IN_TRANSIT_TABLE = 'Goods_in_transit';
 
 const GoodsInTransitSchema = {
   id: {
@@ -24,7 +24,7 @@ const GoodsInTransitSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  StaffId: {
+  staffId: {
     field: 'staff_id',
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -35,12 +35,12 @@ const GoodsInTransitSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  RouteId: {
-    field: 'RouteId',
+  saleId: {
+    field: 'saleI_d',
     allowNull: false,
     type: DataTypes.INTEGER,
     references: {
-      model: ROUTES_TABLE,
+      model: SALES_TABLE,
       key: 'id'
     },
     onUpdate: 'CASCADE',
@@ -61,8 +61,8 @@ const GoodsInTransitSchema = {
 class GoodsInTransit extends Model{
   static associate(models){
     this.belongsTo(models.Product , {as: 'product'});
-    this.belongsTo(models.Staff , {as: 'Staff'});
-    this.belongsTo(models.Routes , {as: 'Route'});
+    this.belongsTo(models.Staff , {as: 'staff'});
+    this.belongsTo(models.Sales , {as: 'sale'});
   }
 
   static config(sequelize){

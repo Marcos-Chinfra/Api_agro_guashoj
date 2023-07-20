@@ -6,16 +6,34 @@ class UnsoldProductsService {
   constructor(){}
 
   async create(data) {
+
+    const movidos = await models.GoodsInTransit.findOne({
+      where: {
+        productId: data.productId,
+        saleId: data.saleId
+      }
+    })
+    const sales =  movidos.amount - data.amount
+
+    const vendidos = await models.SoldProducts.findOne({
+      where: {
+        productId: data.productId,
+        saleId: data.saleId
+      }
+    });
+
+    vendidos.amount = sales
+    await vendidos.save();
+
+    const product = await models.Product.findByPk(data.productId, {
+      include: ['inventory']
+    })
+    const inventario = product.inventory;
+
+    inventario.withdrawals += vendidos.amount;
+    await inventario.save()
+
     const newUnsoldProduct = await  models.UnsoldProducts.create(data);
-
-    // const product = await models.Product.findByPk(data.productId, {
-    //   include: ['inventory']
-    // });
-    // const inventario = product.inventory;
-
-    // inventario.withdrawals += data.amount;
-    // await inventario.save();
-
     return newUnsoldProduct;
   }
 

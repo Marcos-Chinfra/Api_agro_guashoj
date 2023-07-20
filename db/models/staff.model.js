@@ -39,11 +39,11 @@ class Staff extends Model{
   static associate(models){
     this.hasMany(models.Sales, {
       as: 'Sales',
-      foreignKey: 'StaffId'
+      foreignKey: 'staffId'
     });
     this.hasMany(models.GoodsInTransit, {
       as: 'GoodsInTransit',
-      foreignKey: "StaffId"
+      foreignKey: "staffId"
     });
   }
 

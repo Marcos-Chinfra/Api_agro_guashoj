@@ -11,7 +11,7 @@ const SalesSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  StaffId: {
+  staffId: {
     field: 'StaffId',
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -22,7 +22,7 @@ const SalesSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  RouteId: {
+  routeId: {
     field: 'RouteId',
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -53,23 +53,27 @@ const SalesSchema = {
 class Sales extends Model{
   static associate(models){
     this.belongsTo(models.Staff, {
-      as: 'Staff'
+      as: 'staff'
     });
     this.belongsTo(models.Routes, {
-      as: 'Route'
+      as: 'route'
     });
     this.hasMany(models.ReturnedProducts,{
       as: 'ReturnedProducts',
-      foreignKey: 'SaleId'
+      foreignKey: 'saleId'
     });
     this.hasMany(models.SoldProducts, {
       as: 'SoldProducts',
-      foreignKey: "SaleId"
+      foreignKey: "saleId"
     });
     this.hasMany(models.UnsoldProducts, {
       as: 'UnsoldProducts',
-      foreignKey: "SaleId"
-    })
+      foreignKey: "saleId"
+    });
+    this.hasMany(models.GoodsInTransit, {
+      as: 'GoodsInTransit',
+      foreignKey: "saleId"
+    });
   }
 
   static config(sequelize){

@@ -77,7 +77,7 @@ class Product extends Model {
       as: 'GoodsInTransit',
       foreignKey: "productId"
     });
-    this.hasMany(models.ShiftOutputSchema, {
+    this.hasMany(models.ShiftOutput, {
       as: 'ShiftOutput',
       foreignKey:'productId'
     })

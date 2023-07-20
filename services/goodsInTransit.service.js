@@ -6,15 +6,13 @@ class GoodsInTransitService {
   constructor(){}
 
   async create(data) {
-    const newGoodInTransit= await  models.GoodsInTransit.create(data);
+    const newGoodInTransit = await  models.GoodsInTransit.create(data);
 
-    const product = await models.Product.findByPk(data.productId, {
-      include: ['inventory']
+    await models.SoldProducts.create({
+      productId: data.productId,
+      saleId: data.saleId,
+      amount: 0
     });
-    const inventario = product.inventory;
-
-    inventario.withdrawals += data.amount;
-    await inventario.save();
 
     return newGoodInTransit;
   }
@@ -34,22 +32,6 @@ class GoodsInTransitService {
 
   async update(id, changes) {
     const record = await this.findOne(id);
-
-    const product = await models.Product.findByPk(record.productId, {
-      include: ['inventory']
-    });
-    const inventario = product.inventory;
-
-    if(record.amount > changes.amount){
-      const y = record.amount - changes.amount;
-      inventario.withdrawals -= y
-      await inventario.save();
-    } else {
-      const y = changes.amount - record.amount ;
-      inventario.withdrawals += y
-      await inventario.save();
-    }
-
     const rta = await record.update(changes);
     return rta;
   }

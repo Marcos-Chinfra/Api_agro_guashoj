@@ -23,7 +23,7 @@ const UnsoldProductsSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  SaleId: {
+  saleId: {
     field: 'sale_id',
     allowNull: false,
     type: DataTypes.INTEGER,
@@ -48,8 +48,8 @@ const UnsoldProductsSchema = {
 
 class UnsoldProducts extends Model{
   static associate(models){
-    this.belongsTo(models.Sales, {as: 'sales'});
-    this.belongsTo(models.Product, {as: 'Product'});
+    this.belongsTo(models.Sales, {as: 'sale'});
+    this.belongsTo(models.Product, {as: 'product'});
   }
 
   static config(sequelize){
