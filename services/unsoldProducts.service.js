@@ -7,31 +7,23 @@ class UnsoldProductsService {
 
   async create(data) {
 
-    const movidos = await models.GoodsInTransit.findOne({
+    const moved = await models.GoodsInTransit.findOne({
       where: {
         productId: data.productId,
         saleId: data.saleId
       }
     })
-    const sales =  movidos.amount - data.amount
+    const sales =  moved.amount - data.amount
 
-    const vendidos = await models.SoldProducts.findOne({
+    const sold = await models.SoldProducts.findOne({
       where: {
         productId: data.productId,
         saleId: data.saleId
       }
     });
 
-    vendidos.amount = sales
-    await vendidos.save();
-
-    const product = await models.Product.findByPk(data.productId, {
-      include: ['inventory']
-    })
-    const inventario = product.inventory;
-
-    inventario.withdrawals += vendidos.amount;
-    await inventario.save()
+    sold.amount = sales
+    await sold.save();
 
     const newUnsoldProduct = await  models.UnsoldProducts.create(data);
     return newUnsoldProduct;

@@ -57,7 +57,7 @@ const ProductSchema = {
 class Product extends Model {
   static associate(models){
     this.belongsTo(models.Category, {as: 'category'})
-    this.hasOne(models.Inventory, {
+    this.hasMany(models.Inventory, {
       as: 'inventory',
       foreignKey:'productId'
     })

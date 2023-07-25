@@ -7,16 +7,14 @@ class ReturnedProductsService {
 
   async create(data) {
 
-    const vendidos = await models.SoldProducts.findOne({
+    const sold = await models.SoldProducts.findOne({
       where: {
         productId: data.productId,
         saleId: data.saleId
       }
     })
-
-    vendidos.amount -= data.amount;
-
-    await vendidos.save();
+    sold.amount -= data.amount;
+    await sold.save();
 
     const newReturnedProduct = await  models.ReturnedProducts.create(data);
     return newReturnedProduct;
