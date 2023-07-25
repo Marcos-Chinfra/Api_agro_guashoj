@@ -11,7 +11,7 @@ class GoodsInTransitService {
     await models.SoldProducts.create({
       productId: data.productId,
       saleId: data.saleId,
-      amount: 0
+      amount: data.amount
     });
 
     return newGoodInTransit;

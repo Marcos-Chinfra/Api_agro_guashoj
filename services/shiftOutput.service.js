@@ -17,19 +17,10 @@ class ShiftOutputService {
       turno = 'tarde';
     }
 
-
     const newRecord = await  models.ShiftOutput.create({
       ...data,
       workingDay: turno
     })
-
-    const product = await models.Product.findByPk(data.productId, {
-      include: ['inventory']
-    })
-    const inventario = product.inventory;
-
-    inventario.incomings += data.amount;
-    await inventario.save()
 
     return newRecord;
   }
@@ -51,22 +42,6 @@ class ShiftOutputService {
 
   async update(id, changes) {
     const record = await this.findOne(id);
-
-    const product = await models.Product.findByPk(record.productId, {
-      include: ['inventory']
-    });
-    const inventario = product.inventory;
-
-    if(record.amount > changes.amount){
-      const x = record.amount - changes.amount;
-      inventario.incomings -= x
-      await inventario.save();
-    } else {
-      const y = changes.amount - record.amount ;
-      inventario.incomings += y
-      await inventario.save();
-    }
-
     const rta = await record.update(changes);
     return rta;
   }
