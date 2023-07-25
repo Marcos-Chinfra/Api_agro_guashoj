@@ -9,11 +9,14 @@ const withdrawals = Joi.number().integer();
 const createInventorySchema = Joi.object({
   productID: productID.required(),
   stock: stock.required(),
+  withdrawals: withdrawals.required(),
+  incomings: incomings.required()
 });
 
 const updateInventorySchema = Joi.object({
   id: id,
   incomings: incomings,
+  withdrawals: withdrawals
 });
 
 const getInventorySchema = Joi.object({

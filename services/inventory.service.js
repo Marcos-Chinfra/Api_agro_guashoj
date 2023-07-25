@@ -32,19 +32,6 @@ class InventoryService {
     return rta;
   }
 
-  // async updateIncomings(id, changes){
-  // const product = await models.Inventory.findOne({
-  //   where: {
-  //     productId: id
-  //   }
-  // });
-
-  // product.incomings += changes.incomings
-
-  // const rta = await product.save();
-  // return rta
-  // }
-
   async delete(id) {
     const model = await this.findOne(id);
     await model.destroy();

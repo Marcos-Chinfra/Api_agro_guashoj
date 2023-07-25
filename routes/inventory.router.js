@@ -42,7 +42,6 @@ router.post('/',
   }
 );
 
-
 router.patch('/:id',
   validatorHandler(getInventorySchema, 'params'),
   validatorHandler(updateInventorySchema, 'body'),

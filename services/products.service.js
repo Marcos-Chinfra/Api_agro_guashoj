@@ -6,12 +6,6 @@ class productsService {
 
   async create(data){
     const newProduct = await models.Product.create(data);
-    await models.Inventory.create({
-      productId: newProduct.id,
-      stock: 0,
-      incomings: 0,
-      withdrawals: 0
-    });
     return newProduct;
   };
 
@@ -22,7 +16,7 @@ class productsService {
 
   async findOne(id){
     const product = await models.Product.findByPk(id, {
-      include: ['inventory', 'supply']
+      include: ['inventory']
     })
     if(!product){
       throw boom.notFound('Producto out of stock ')
