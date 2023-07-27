@@ -26,7 +26,9 @@ class SalesService {
   // }
 
   async find() {
-    const sales = await  models.Sales.findAll();
+    const sales = await  models.Sales.findAll({
+      include: ['staff', 'route', 'SoldProducts', 'ReturnedProducts', 'UnsoldProducts', 'GoodsInTransit']
+    });
     return sales;
   }
 
