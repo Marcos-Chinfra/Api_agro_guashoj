@@ -8,9 +8,9 @@ const total = Joi.number()
 
 
 const createSalesSchema = Joi.object({
-  observations: observations.required(),
   staffId: staffId.required(),
   routeId: routeId.required(),
+  observations: observations,
   total: total
 });
 
