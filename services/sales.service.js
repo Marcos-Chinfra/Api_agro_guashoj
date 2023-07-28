@@ -27,14 +27,34 @@ class SalesService {
 
   async find() {
     const sales = await  models.Sales.findAll({
-      include: ['staff', 'route', 'SoldProducts', 'ReturnedProducts', 'UnsoldProducts', 'GoodsInTransit']
+      include: [
+        'staff',
+        'route',
+        'SoldProducts',
+        'ReturnedProducts',
+        'UnsoldProducts',
+        {
+          association: 'GoodsInTransit',
+          include: ['product']
+        },
+      ]
     });
     return sales;
   }
 
   async findOne(id) {
     const sale = await  models.Sales.findByPk(id, {
-      include: ['staff', 'route', 'SoldProducts', 'ReturnedProducts', 'UnsoldProducts', 'GoodsInTransit']
+      include: [
+        'staff',
+        'route',
+        'SoldProducts',
+        'ReturnedProducts',
+        'UnsoldProducts',
+        {
+          association: 'GoodsInTransit',
+          include: ['product']
+        },
+      ]
     });
     if (!sale) {
       throw boom.notFound('sale not found');
