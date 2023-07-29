@@ -7,13 +7,13 @@ class UnsoldProductsService {
 
   async create(data) {
 
-    const moved = await models.GoodsInTransit.findOne({
-      where: {
-        productId: data.productId,
-        saleId: data.saleId
-      }
-    })
-    const sales =  moved.amount - data.amount
+    // const moved = await models.GoodsInTransit.findOne({
+    //   where: {
+    //     productId: data.productId,
+    //     saleId: data.saleId
+    //   }
+    // })
+    // const sales =  moved.amount - data.amount
 
     const sold = await models.SoldProducts.findOne({
       where: {
@@ -22,7 +22,7 @@ class UnsoldProductsService {
       }
     });
 
-    sold.amount = sales
+    sold.amount -= data.amount
     await sold.save();
 
     const newUnsoldProduct = await  models.UnsoldProducts.create(data);

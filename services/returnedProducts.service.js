@@ -13,7 +13,8 @@ class ReturnedProductsService {
         saleId: data.saleId
       }
     })
-    sold.amount -= data.amount;
+    let sale = sold.amount -= data.amount;
+    console.log(sale)
     await sold.save();
 
     const newReturnedProduct = await  models.ReturnedProducts.create(data);
