@@ -40,6 +40,7 @@ function setupModels(sequelize) {
   Supplies.associate(sequelize.models);
   GoodsInTransit.associate(sequelize.models);
   ReturnedProducts.associate(sequelize.models);
+  SoldProducts.associate(sequelize.models);
   UnsoldProducts.associate(sequelize.models);
   Routes.associate(sequelize.models);
   ShiftOutput.associate(sequelize.models);

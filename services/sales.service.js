@@ -10,20 +10,6 @@ class SalesService {
     return newSale;
   }
 
-  // async addSoldProducts(data) {
-  //   const newCollection = await  models.SoldProducts.create(data);
-
-  //   const product = await models.Product.findByPk(data.productId, {
-  //     include: ['inventory']
-  //   })
-  //   const inventory = product.inventory;
-
-  //   inventory.withdrawals += data.amount;
-  //   await inventory.save()
-
-
-  //   return newCollection;
-  // }
 
   async find() {
     const sales = await  models.Sales.findAll({
@@ -47,13 +33,22 @@ class SalesService {
       include: [
         'staff',
         'route',
-        'SoldProducts',
-        'ReturnedProducts',
-        'UnsoldProducts',
+        {
+          association: 'SoldProducts',
+          include: ['product']
+        },
+        {
+          association: 'ReturnedProducts',
+          include: ['product']
+        },
+        {
+          association: 'UnsoldProducts',
+          include: ['product']
+        },
         {
           association: 'GoodsInTransit',
           include: ['product']
-        },
+        }
       ]
     });
     if (!sale) {
