@@ -35,7 +35,12 @@ class UnsoldProductsService {
   }
 
   async findOne(id) {
-    const record = await  models.UnsoldProducts.findByPk(id);
+    const record = await  models.UnsoldProducts.findByPk(id, {
+      include: [
+        'sale',
+        'product',
+      ]
+    });
     if (!record) {
       throw boom.notFound('record not found');
     }

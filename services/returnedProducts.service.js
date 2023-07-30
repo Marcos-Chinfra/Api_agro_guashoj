@@ -27,7 +27,12 @@ class ReturnedProductsService {
   }
 
   async findOne(id) {
-    const record = await  models.ReturnedProducts.findByPk(id);
+    const record = await  models.ReturnedProducts.findByPk(id, {
+      include: [
+        'sale',
+        'product',
+      ]
+    });
     if (!record) {
       throw boom.notFound('record not found');
     }
