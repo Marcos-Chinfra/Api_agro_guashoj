@@ -73,6 +73,18 @@ class UnsoldProductsService {
 
   async delete(id) {
     const model = await this.findOne(id);
+
+    const sold = await models.SoldProducts.findOne({
+      where: {
+        productId: model.productId,
+        saleId: model.saleId
+      }
+    });
+
+    sold.amount += model.amount ;
+    await sold.save();
+
+
     await model.destroy();
     return { rta: true };
   }
