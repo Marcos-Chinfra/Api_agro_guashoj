@@ -49,6 +49,24 @@ class UnsoldProductsService {
 
   async update(id, changes) {
     const record = await this.findOne(id);
+
+    const sold = await models.SoldProducts.findOne({
+      where: {
+        productId: record.productId,
+        saleId: record.saleId
+      }
+    });
+
+    if(record.amount > changes.amount){
+      const x = record.amount - changes.amount;
+      sold.amount += x
+      await sold.save();
+    } else {
+      const y = changes.amount - record.amount ;
+      sold.amount -= y
+      await sold.save();
+    }
+
     const rta = await record.update(changes);
     return rta;
   }
