@@ -5,6 +5,7 @@ const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/err
 
 const app = express();
 const port = process.env.PORT || 3000;
+process.env.TZ = 'America/Guatemala';
 
 app.use(express.json());
 

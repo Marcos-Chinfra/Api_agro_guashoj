@@ -33,7 +33,9 @@ class ShiftOutputService {
   }
 
   async findOne(id) {
-    const record = await  models.ShiftOutput.findByPk(id);
+    const record = await  models.ShiftOutput.findByPk(id, {
+      include: ['product']
+    });
     if (!record) {
       throw boom.notFound('Supply not found');
     }
