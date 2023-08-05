@@ -25,10 +25,17 @@ class ShiftOutputService {
     return newRecord;
   }
 
-  async find() {
-    const records = await  models.ShiftOutput.findAll({
+  async find(query) {
+    const options = {
       include: ['product']
-    });
+    }
+    const {limit, offset} = query;
+    if(limit && offset){
+      options.limit = limit;
+      options.offset = offset;
+    }
+
+    const records = await  models.ShiftOutput.findAll(options);
     return records;
   }
 

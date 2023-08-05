@@ -1,4 +1,5 @@
 const { models } = require('../libs/sequelize');
+const { Op } = require("sequelize");
 const boom = require('@hapi/boom');
 
 class productsService {
@@ -9,8 +10,17 @@ class productsService {
     return newProduct;
   };
 
-  async find(){
-    const rta = await models.Product.findAll()
+  async find(query){
+    const options = {
+      where:{}
+    };
+
+    const {category} = query;
+    if( category ){
+      options.where.categoryId = category
+    }
+
+    const rta = await models.Product.findAll(options)
     return rta;
   };
 

@@ -8,6 +8,7 @@ const categoryId = Joi.number().integer();
 const weight = Joi.number();
 const type = Joi.string().min(3).max(20);
 const unit_of_measurement = Joi.string().min(3).max(20);
+const category = Joi.number().integer();
 
 const createProductSchema = Joi.object({
   name: name.required(),
@@ -33,4 +34,9 @@ const getProductSchema = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createProductSchema, updateProductSchema, getProductSchema }
+const queryParamsSchema = Joi.object({
+  category
+});
+
+
+module.exports = { createProductSchema, updateProductSchema, getProductSchema, queryParamsSchema }

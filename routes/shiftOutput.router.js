@@ -5,16 +5,18 @@ const ShiftOutputService = require('../services/shiftOutput.service');
 const service = new ShiftOutputService();
 
 const validatorHandler = require('../middlewares/validator.handler');
-const { createShiftOutputSchema, getShiftOutputSchema, updateShiftOutputSchema } = require('../schemas/shiftOutput.schema');
+const { createShiftOutputSchema, getShiftOutputSchema, updateShiftOutputSchema, queryParamsSchema } = require('../schemas/shiftOutput.schema');
 
-router.get('/', async (req, res, next) => {
-  try {
-    const records = await service.find();
-    res.json(records);
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/',
+  validatorHandler(queryParamsSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const records = await service.find(req.query);
+      res.json(records);
+    } catch (error) {
+      next(error);
+    }
+  });
 
 router.get('/:id',
   validatorHandler(getShiftOutputSchema, 'params'),
