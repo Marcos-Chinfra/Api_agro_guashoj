@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const { models } = require('../libs/sequelize');
 const boom = require('@hapi/boom');
 
@@ -7,7 +6,7 @@ class InventoryService {
   constructor(){}
 
   async create(data) {
-    const newRecord = await  models.Inventory.create(data)
+    const newRecord = await  models.Inventory.create(data);
     return newRecord;
   }
 

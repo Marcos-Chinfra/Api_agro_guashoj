@@ -29,8 +29,16 @@ class UnsoldProductsService {
     return newUnsoldProduct;
   }
 
-  async find() {
-    const records = await  models.UnsoldProducts.findAll();
+  async find(query) {
+    const options = {
+      where:{}
+    };
+    const {product} = query;
+    if( product ){
+      options.where.productId = product
+    }
+
+    const records = await  models.UnsoldProducts.findAll(options);
     return records;
   }
 

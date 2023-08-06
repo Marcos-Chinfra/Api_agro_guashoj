@@ -4,7 +4,7 @@ const id = Joi.number().integer();
 const saleId = Joi.number().integer();
 const productId = Joi.number().integer();
 const amount = Joi.number().integer();
-
+const product = Joi.number().integer();
 
 const createReturnedProductsSchema = Joi.object({
   amount: amount.required(),
@@ -22,4 +22,8 @@ const getReturnedProductsSchema = Joi.object({
   id: id.required(),
 });
 
-module.exports = { createReturnedProductsSchema, updateReturnedProductsSchema, getReturnedProductsSchema }
+const queryParamsSchema = Joi.object({
+  product
+});
+
+module.exports = { createReturnedProductsSchema, updateReturnedProductsSchema, getReturnedProductsSchema, queryParamsSchema }

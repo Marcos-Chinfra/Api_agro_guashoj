@@ -21,7 +21,15 @@ class ReturnedProductsService {
     return newReturnedProduct;
   }
 
-  async find() {
+  async find(query) {
+    const options = {
+      where:{}
+    };
+    const {product} = query;
+    if( product ){
+      options.where.productId = product
+    }
+
     const records = await  models.ReturnedProducts.findAll();
     return records;
   }
