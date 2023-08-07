@@ -23,6 +23,13 @@ class ReturnedProductsService {
 
   async find(query) {
     const options = {
+      include:[
+        'product',
+        {
+          association: 'sale',
+          include: ['staff', 'route']
+        },
+      ],
       where:{}
     };
     const {product} = query;
