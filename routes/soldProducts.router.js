@@ -5,15 +5,17 @@ const SoldProductsService = require('../services/soldProducts.service');
 const service = new SoldProductsService();
 
 const validatorHandler = require('../middlewares/validator.handler');
-const { updateSoldProductsSchema, getSoldProductsSchema, createSoldProductsSchema } = require('../schemas/soldProducts.schema');
+const { updateSoldProductsSchema, getSoldProductsSchema, createSoldProductsSchema, queryParamsSchema } = require('../schemas/soldProducts.schema');
 
-router.get('/', async (req, res, next) => {
-  try {
-    const records = await service.find();
-    res.json(records);
-  } catch (error) {
-    next(error);
-  }
+router.get('/',
+  validatorHandler(queryParamsSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const records = await service.find(req.query);
+      res.json(records);
+    } catch (error) {
+      next(error);
+    }
 });
 
 router.get('/:id',

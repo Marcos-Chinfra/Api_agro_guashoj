@@ -10,8 +10,22 @@ class SoldProductsService {
     return newSoldProduct;
   }
 
-  async find() {
-    const records = await  models.SoldProducts.findAll();
+  async find(query) {
+    const options = {
+      include:[
+        'product',
+        {
+          association: 'sale',
+          include: ['staff', 'route']
+        },
+      ],
+      where:{}
+    };
+    const {product} = query;
+    if( product ){
+      options.where.productId = product
+    }
+    const records = await  models.SoldProducts.findAll(options);
     return records;
   }
 
