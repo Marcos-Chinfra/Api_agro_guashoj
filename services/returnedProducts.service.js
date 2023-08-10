@@ -6,7 +6,6 @@ class ReturnedProductsService {
   constructor(){}
 
   async create(data) {
-
     const sold = await models.SoldProducts.findOne({
       where: {
         productId: data.productId,
@@ -37,7 +36,7 @@ class ReturnedProductsService {
       options.where.productId = product
     }
 
-    const records = await  models.ReturnedProducts.findAll();
+    const records = await  models.ReturnedProducts.findAll(options);
     return records;
   }
 
