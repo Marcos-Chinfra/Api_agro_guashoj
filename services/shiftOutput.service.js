@@ -27,8 +27,15 @@ class ShiftOutputService {
 
   async find(query) {
     const options = {
-      include: ['product']
+      include: ['product'],
+      where:{}
     }
+
+    const {product} = query;
+    if( product ){
+      options.where.productId = product
+    }
+
     const {limit, offset} = query;
     if(limit && offset){
       options.limit = limit;
