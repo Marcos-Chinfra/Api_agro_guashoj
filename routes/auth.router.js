@@ -12,7 +12,7 @@ passport.authenticate('local', {session: false}),
       const payload = {
         sub: user.id,
       }
-      const token = jwt.sign(payload, config.jwtSecret, {expiresIn: '5min'});
+      const token = jwt.sign(payload, config.jwtSecret, {expiresIn: '5d'});
       res.json({
         user,
         token
