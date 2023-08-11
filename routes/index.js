@@ -35,7 +35,7 @@ function routerApi(app) {
   router.use('/goods-in-transit', passport.authenticate('jwt', {session: false}), goodsInTransitRouter);
   router.use('/routes', passport.authenticate('jwt', {session: false}), routesRouter);
   router.use('/shift-output', passport.authenticate('jwt', {session: false}), shiftOutputRouter);
-  router.use('/users', passport.authenticate('jwt', {session: false}), userRouter);
+  router.use('/users', userRouter);
   router.use('/auth', authRouter);
 }
 
