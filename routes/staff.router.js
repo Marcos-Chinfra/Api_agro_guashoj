@@ -6,9 +6,11 @@ const service = new StaffService();
 
 const validatorHandler = require('../middlewares/validator.handler.js');
 const { createStaffSchema, updateStaffSchema, getStaffSchema} = require('../schemas/staff.schema');
+const passport = require('passport');
 
 
 router.get('/',
+  passport.authenticate('jwt', {session: false}),
   async (req, res, next) => {
     try{
       const staff = await service.find();
@@ -33,6 +35,7 @@ router.get('/:id',
 );
 
 router.post('/',
+  passport.authenticate('jwt', {session: false}),
   validatorHandler(createStaffSchema, 'body'),
   async (req, res, next) => {
     try{

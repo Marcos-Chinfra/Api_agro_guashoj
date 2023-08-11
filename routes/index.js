@@ -13,11 +13,14 @@ const unsoldProductsRouter = require('./unsoldProducts.router');
 const routesRouter = require('./routes.router');
 const goodsInTransitRouter = require('./goodsInTransit.router');
 const shiftOutputRouter = require('./shiftOutput.router');
+const userRouter = require('./user.router');
+const authRouter = require('./auth.router');
+const { checkApiKey } = require('../middlewares/auth.handler');
 
 
 function routerApi(app) {
   const router = express.Router();
-  app.use('/api/v1', router);
+  app.use('/api/v1', checkApiKey ,router);
   router.use('/categories', categoriesRouter);
   router.use('/inventory', inventoryRouter);
   router.use('/products', productsRouter);
@@ -31,6 +34,8 @@ function routerApi(app) {
   router.use('/goods-in-transit', goodsInTransitRouter);
   router.use('/routes', routesRouter);
   router.use('/shift-output', shiftOutputRouter);
+  router.use('/users', userRouter);
+  router.use('/auth', authRouter);
 }
 
 module.exports = routerApi;

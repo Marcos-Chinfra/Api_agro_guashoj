@@ -12,6 +12,7 @@ const { ReturnedProducts, ReturnedProductsSchema } = require('./returnedProducts
 const { Routes, RoutesSchema  } = require('./routes.model');
 const { UnsoldProducts, UnsoldProductsSchema } = require('./unsoldProducts.model');
 const { ShiftOutput, ShiftOutputSchema  } = require('./shiftOutput.model');
+const { User, UserSchema } = require('./user.model')
 
 
 function setupModels(sequelize) {
@@ -29,6 +30,7 @@ function setupModels(sequelize) {
   Routes.init(RoutesSchema, Routes.config(sequelize));
   UnsoldProducts.init(UnsoldProductsSchema, UnsoldProducts.config(sequelize));
   ShiftOutput.init(ShiftOutputSchema, ShiftOutput.config(sequelize));
+  User.init(UserSchema, User.config(sequelize));
 
 
   Category.associate(sequelize.models);
