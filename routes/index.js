@@ -16,25 +16,26 @@ const shiftOutputRouter = require('./shiftOutput.router');
 const userRouter = require('./user.router');
 const authRouter = require('./auth.router');
 const { checkApiKey } = require('../middlewares/auth.handler');
+const passport = require('passport');
 
 
 function routerApi(app) {
   const router = express.Router();
   app.use('/api/v1', checkApiKey ,router);
-  router.use('/categories', categoriesRouter);
-  router.use('/inventory', inventoryRouter);
-  router.use('/products', productsRouter);
-  router.use('/providers', providerRouter);
-  router.use('/sales', salesRouter);
-  router.use('/sold-products', soldProductsRouter);
-  router.use('/staff', staffRouter);
-  router.use('/supplies', supplyRouter);
-  router.use('/unsold-products', unsoldProductsRouter);
-  router.use('/returned-products', returnedProductsRouter);
-  router.use('/goods-in-transit', goodsInTransitRouter);
-  router.use('/routes', routesRouter);
-  router.use('/shift-output', shiftOutputRouter);
-  router.use('/users', userRouter);
+  router.use('/categories', passport.authenticate('jwt', {session: false}), categoriesRouter);
+  router.use('/inventory', passport.authenticate('jwt', {session: false}), inventoryRouter);
+  router.use('/products', passport.authenticate('jwt', {session: false}), productsRouter);
+  router.use('/providers', passport.authenticate('jwt', {session: false}), providerRouter);
+  router.use('/sales', passport.authenticate('jwt', {session: false}), salesRouter);
+  router.use('/sold-products', passport.authenticate('jwt', {session: false}), soldProductsRouter);
+  router.use('/staff', passport.authenticate('jwt', {session: false}), staffRouter);
+  router.use('/supplies', passport.authenticate('jwt', {session: false}), supplyRouter);
+  router.use('/unsold-products', passport.authenticate('jwt', {session: false}), unsoldProductsRouter);
+  router.use('/returned-products', passport.authenticate('jwt', {session: false}), returnedProductsRouter);
+  router.use('/goods-in-transit', passport.authenticate('jwt', {session: false}), goodsInTransitRouter);
+  router.use('/routes', passport.authenticate('jwt', {session: false}), routesRouter);
+  router.use('/shift-output', passport.authenticate('jwt', {session: false}), shiftOutputRouter);
+  router.use('/users', passport.authenticate('jwt', {session: false}), userRouter);
   router.use('/auth', authRouter);
 }
 

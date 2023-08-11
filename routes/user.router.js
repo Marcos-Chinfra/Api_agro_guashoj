@@ -9,7 +9,6 @@ const { updateUserSchema, createUserSchema, getUserSchema } = require('../schema
 const passport = require('passport');
 
 router.get('/',
-passport.authenticate('jwt', {session: false}),
 async (req, res, next) => {
   try {
     const users = await service.find();
