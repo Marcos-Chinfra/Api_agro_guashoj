@@ -9,7 +9,7 @@ process.env.TZ = 'America/Guatemala';
 
 app.use(express.json());
 
-const whitelist = ['http://localhost:8080', 'http://localhost:5173', 'https://dulcet-zuccutto-5ab957.netlify.app'];
+const whitelist = ['http://localhost:8080', 'http://localhost:5173', 'https://main--dulcet-zuccutto-5ab957.netlify.app'];
 const options = {
   origin: (origin, callback) => {
     if(whitelist.includes(origin) || !origin){
