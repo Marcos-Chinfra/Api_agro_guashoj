@@ -5,11 +5,13 @@ const name = Joi.string().min(3).max(20);
 const lastName = Joi.string().min(2).max(20);
 const phone = Joi.string().min(3).max(10);
 const role = Joi.string().min(5);
+const image = Joi.string().uri();
 
 const createStaffSchema = Joi.object({
   name: name.required(),
   lastName: lastName.required(),
   phone: phone.required(),
+  image: image.required(),
   role: role
 });
 

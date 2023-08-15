@@ -17,7 +17,8 @@ const RoutesSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',
-    defaultValue: Sequelize.NOW
+    defaultValue: Sequelize.NOW,
+    timezone: 'America/Guatemala',
   }
 }
 

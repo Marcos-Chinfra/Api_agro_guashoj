@@ -31,6 +31,10 @@ const ProductSchema = {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   unit_of_measurement:{
     type: DataTypes.STRING,
     allowNull: false
@@ -38,8 +42,9 @@ const ProductSchema = {
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
+    field: 'create_at',
     defaultValue: Sequelize.NOW,
+    timezone: 'America/Guatemala',
   },
   categoryId: {
     field: 'categoryId',

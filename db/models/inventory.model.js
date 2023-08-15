@@ -37,8 +37,9 @@ const InventorySchema = {
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
+    field: 'create_at',
     defaultValue: Sequelize.NOW,
+    timezone: 'America/Guatemala',
   }
 }
 

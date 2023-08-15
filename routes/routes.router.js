@@ -6,17 +6,21 @@ const service = new RoutesService();
 
 const validatorHandler = require('../middlewares/validator.handler');
 const { createRouteSchema, updateRouteSchema, getRouteSchema } = require('../schemas/routes.schema');
+const { checkRoles } = require('../middlewares/auth.handler');
 
-router.get('/', async (req, res, next) => {
-  try {
-    const routes = await service.find();
-    res.json(routes);
-  } catch (error) {
-    next(error);
-  }
+router.get('/',
+  checkRoles(['owner', 'admin', 'worker']) ,
+  async (req, res, next) => {
+    try {
+      const routes = await service.find();
+      res.json(routes);
+    } catch (error) {
+      next(error);
+    }
 });
 
 router.get('/:id',
+  checkRoles(['owner', 'admin', 'worker']) ,
   validatorHandler(getRouteSchema, 'params'),
   async (req, res, next) => {
     try {
@@ -30,6 +34,7 @@ router.get('/:id',
 );
 
 router.post('/',
+checkRoles(['owner']) ,
   validatorHandler(createRouteSchema, 'body'),
   async (req, res, next) => {
     try{
@@ -44,6 +49,7 @@ router.post('/',
 
 
 router.patch('/:id',
+checkRoles(['owner']) ,
   validatorHandler(getRouteSchema, 'params'),
   validatorHandler(updateRouteSchema, 'body'),
   async (req, res, next) => {
@@ -59,6 +65,7 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
+checkRoles(['owner']) ,
   validatorHandler(getRouteSchema, 'params'),
   async (req, res, next) => {
     try {

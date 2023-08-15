@@ -1,29 +1,31 @@
 const express = require('express');
 const router = express.Router();
 
-const GoodsInTransitService = require('../services/goodsInTransit.service');
-const service = new GoodsInTransitService();
-
 const validatorHandler = require('../middlewares/validator.handler');
-const { createGoodsInTransitSchema, updateGoodsInTransitSchema, getGoodsInTransitSchema } = require('../schemas/goodsInTransit.schema');
+const { createCarSchema, updateUserSchema, getUserSchema } = require('../schemas/cars.schema');
+
+const CarsService = require('../services/cars.service');
+const service = new CarsService();
+
+
 
 router.get('/',
   async (req, res, next) => {
     try {
-      const records = await service.find();
-      res.json(records);
+      const cars = await service.find();
+      res.json(cars);
     } catch (error) {
       next(error);
     }
-  });
+});
 
 router.get('/:id',
-  validatorHandler(getGoodsInTransitSchema, 'params'),
+  validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const record = await service.findOne(id);
-      res.json(record);
+      const car = await service.findOne(id);
+      res.json(car);
     } catch (error) {
       next(error);
     }
@@ -31,28 +33,28 @@ router.get('/:id',
 );
 
 router.post('/',
-  validatorHandler(createGoodsInTransitSchema, 'body'),
+  validatorHandler(createCarSchema, 'body'),
   async (req, res, next) => {
-    try{
+    try {
       const body = req.body;
-      const newRecord = await service.create(body);
-      res.status(201).json(newRecord)
-    }catch(err){
-      next(err);
+      const newCar = await service.create(body);
+      res.status(201).json(newCar);
+    } catch (error) {
+      next(error);
     }
   }
 );
 
 
 router.patch('/:id',
-  validatorHandler(getGoodsInTransitSchema, 'params'),
-  validatorHandler(updateGoodsInTransitSchema, 'body'),
+  validatorHandler(getUserSchema, 'params'),
+  validatorHandler(updateUserSchema, 'body'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
       const body = req.body;
-      const record = await service.update(id, body);
-      res.json(record);
+      const car = await service.update(id, body);
+      res.json(car);
     } catch (error) {
       next(error);
     }
@@ -60,7 +62,7 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
-  validatorHandler(getGoodsInTransitSchema, 'params'),
+  validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;

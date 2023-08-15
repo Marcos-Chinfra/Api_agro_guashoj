@@ -1,35 +1,33 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
-const USER_TABLE = 'Users';
+const CARS_TABLE = 'Cars';
 
-const UserSchema = {
+const CarsSchema = {
   id: {
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  name: {
-    allowNull: false,
+  model: {
     type: DataTypes.STRING,
-    unique: true,
-  },
-  role: {
     allowNull: false,
-    type: DataTypes.STRING,
-    defaultValue: 'worker'
   },
-  phone: {
+  plate: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  spend: {
+    type: DataTypes.INTEGER,
     allowNull: true,
-    type: DataTypes.STRING,
   },
-  image: {
+  server: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: true,
   },
-  password: {
+  mileage: {
+    type: DataTypes.INTEGER,
     allowNull: false,
-    type: DataTypes.STRING
   },
   createdAt: {
     allowNull: false,
@@ -40,18 +38,22 @@ const UserSchema = {
   }
 }
 
-class User extends Model {
-  //static associate() {}
+class Cars extends Model{
+  static associate(models){
+    this.hasMany(models.Sales, {
+      as: 'Sales',
+      foreignKey: 'car_id'
+    });
+  }
 
-  static config(sequelize) {
+  static config(sequelize){
     return {
       sequelize,
-      tableName: USER_TABLE,
-      modelName: 'User',
+      tableName: CARS_TABLE,
+      modelName: 'Cars',
       timestamps: false
     }
   }
-}
+};
 
-
-module.exports = { USER_TABLE, UserSchema, User }
+module.exports = { CARS_TABLE, Cars, CarsSchema }

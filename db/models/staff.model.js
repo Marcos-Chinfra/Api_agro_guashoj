@@ -22,6 +22,10 @@ const StaffSchema = {
     allowNull: true,
     type: DataTypes.STRING,
   },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   role: {
     allowNull: false,
     type: DataTypes.STRING,
@@ -30,8 +34,9 @@ const StaffSchema = {
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
-    field: 'created_at',
+    field: 'create_at',
     defaultValue: Sequelize.NOW,
+    timezone: 'America/Guatemala',
   }
 }
 

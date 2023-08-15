@@ -33,6 +33,7 @@ class SalesService {
       include: [
         'staff',
         'route',
+        'cars',
         {
           association: 'SoldProducts',
           include: ['product']

@@ -2,9 +2,11 @@
 
 const { CATEGORY_TABLE, CategorySchema } = require('../models/category.model');
 const { PRODUCT_TABLE, ProductSchema } = require('../models/products.model');
+const { CARS_TABLE, CarsSchema } = require('../models/cars.model');
 const { PROVIDER_TABLE, ProviderSchema } = require('../models/providers.model');
 const { SALES_TABLE, SalesSchema } = require('../models/sales.model');
 const { STAFF_TABLE, StaffSchema } = require('../models/staff.model');
+const { USER_TABLE, UserSchema } = require('../models/user.model');
 const { INVENTORY_TABLE, InventorySchema} = require('../models/inventory.model');
 const { SOLD_PRODUCTS_TABLE, SoldProductsSchema } = require('../models/soldProducts.mode');
 const { SUPPLIES_TABLE, SuppliesSchema } = require('../models/supply.model');
@@ -23,6 +25,8 @@ module.exports = {
     await queryInterface.createTable(PROVIDER_TABLE, ProviderSchema);
     await queryInterface.createTable(STAFF_TABLE, StaffSchema);
     await queryInterface.createTable(INVENTORY_TABLE, InventorySchema);
+    await queryInterface.createTable(CARS_TABLE, CarsSchema);
+    await queryInterface.createTable(USER_TABLE, UserSchema);
     await queryInterface.createTable(ROUTES_TABLE, RoutesSchema);
     await queryInterface.createTable(SALES_TABLE, SalesSchema);
     await queryInterface.createTable(SOLD_PRODUCTS_TABLE, SoldProductsSchema);
@@ -38,6 +42,8 @@ module.exports = {
     await queryInterface.dropTable(PRODUCT_TABLE);
     await queryInterface.dropTable(PROVIDER_TABLE);
     await queryInterface.dropTable(STAFF_TABLE);
+    await queryInterface.dropTable(CARS_TABLE);
+    await queryInterface.dropTable(USER_TABLE);
     await queryInterface.dropTable(INVENTORY_TABLE);
     await queryInterface.dropTable(ROUTES_TABLE);
     await queryInterface.dropTable(SALES_TABLE);

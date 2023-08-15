@@ -2,7 +2,7 @@ const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const { PRODUCT_TABLE } = require('./products.model');
 
-const SHIFT_OUTPUT_TABLE = 'shift_output';
+const SHIFT_OUTPUT_TABLE = 'Shift_output';
 
 const ShiftOutputSchema = {
   id: {
@@ -35,7 +35,8 @@ const ShiftOutputSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',
-    defaultValue: Sequelize.NOW
+    defaultValue: Sequelize.NOW,
+    timezone: 'America/Guatemala',
   }
 }
 

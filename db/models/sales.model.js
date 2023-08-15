@@ -1,6 +1,8 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
+
 const { STAFF_TABLE } = require('./staff.model');
 const { ROUTES_TABLE } = require('./routes.model');
+const { CARS_TABLE } = require('./cars.model');
 
 const SALES_TABLE = 'Sales';
 
@@ -33,9 +35,20 @@ const SalesSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL'
   },
-  total:{
+  carId: {
+    field: 'car_id',
     allowNull: false,
     type: DataTypes.INTEGER,
+    references: {
+      model: CARS_TABLE,
+      key: 'id'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
+  },
+  total:{
+    allowNull: false,
+    type: DataTypes.FLOAT,
   },
   observations:{
     type: DataTypes.TEXT,
@@ -46,7 +59,8 @@ const SalesSchema = {
     allowNull: false,
     type: DataTypes.DATE,
     field: 'create_at',
-    defaultValue: Sequelize.NOW
+    defaultValue: Sequelize.NOW,
+    timezone: 'America/Guatemala',
   }
 }
 
@@ -57,6 +71,9 @@ class Sales extends Model{
     });
     this.belongsTo(models.Routes, {
       as: 'route'
+    });
+    this.belongsTo(models.Cars, {
+      as: 'cars'
     });
     this.hasMany(models.ReturnedProducts,{
       as: 'ReturnedProducts',

@@ -1,14 +1,17 @@
 const express = require('express');
+const router = express.Router();
 
-const ProductsServices = require('../services/products.service');
 const validatorHandler = require('../middlewares/validator.handler');
 const { createProductSchema, updateProductSchema, getProductSchema, queryParamsSchema } = require('../schemas/products.schema');
+const { checkRoles } = require('../middlewares/auth.handler');
 
-const router = express.Router();
+
+const ProductsServices = require('../services/products.service');
 const service = new ProductsServices();
 
 
 router.get('/',
+  checkRoles(['owner', 'admin', 'worker']) ,
   validatorHandler(queryParamsSchema, 'query'),
   async (req, res, next) => {
     try{
@@ -20,18 +23,20 @@ router.get('/',
 });
 
 router.get('/:id',
-validatorHandler(getProductSchema, 'params'),
-  async (req, res, next) => {
-    try{
-      const { id } = req.params;
-      const product = await service.findOne(id);
-      res.json(product)
-    }catch(error){
-      next(error);
-    }
+  checkRoles(['owner', 'admin', 'worker']) ,
+  validatorHandler(getProductSchema, 'params'),
+    async (req, res, next) => {
+      try{
+        const { id } = req.params;
+        const product = await service.findOne(id);
+        res.json(product)
+      }catch(error){
+        next(error);
+      }
   });
 
 router.post('/',
+checkRoles(['owner', 'admin']) ,
   validatorHandler(createProductSchema, 'body'),
   async (req, res) => {
     const body = req.body;
@@ -41,6 +46,7 @@ router.post('/',
 )
 
 router.patch('/:id',
+  checkRoles(['owner', 'admin']) ,
   validatorHandler(getProductSchema, 'params'),
   validatorHandler(updateProductSchema, 'body'),
     async (req, res, next) => {
@@ -55,6 +61,7 @@ router.patch('/:id',
     });
 
 router.delete('/:id',
+  checkRoles(['owner', 'admin']) ,
     validatorHandler(getProductSchema, 'params'),
     async (req, res) => {
       const { id } = req.params;

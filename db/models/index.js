@@ -6,13 +6,15 @@ const { Provider, ProviderSchema } = require('./providers.model');
 const { Sales, SalesSchema } = require('./sales.model');
 const { SoldProducts, SoldProductsSchema } = require('./soldProducts.mode');
 const { Staff, StaffSchema } = require('./staff.model');
+const { Cars, CarsSchema } = require('./cars.model');
 const { Supplies, SuppliesSchema } = require('./supply.model');
 const { GoodsInTransit, GoodsInTransitSchema } = require('./goodsInTransit.model');
 const { ReturnedProducts, ReturnedProductsSchema } = require('./returnedProducts.model');
 const { Routes, RoutesSchema  } = require('./routes.model');
 const { UnsoldProducts, UnsoldProductsSchema } = require('./unsoldProducts.model');
 const { ShiftOutput, ShiftOutputSchema  } = require('./shiftOutput.model');
-const { User, UserSchema } = require('./user.model')
+const { User, UserSchema } = require('./user.model');
+
 
 
 function setupModels(sequelize) {
@@ -31,6 +33,7 @@ function setupModels(sequelize) {
   UnsoldProducts.init(UnsoldProductsSchema, UnsoldProducts.config(sequelize));
   ShiftOutput.init(ShiftOutputSchema, ShiftOutput.config(sequelize));
   User.init(UserSchema, User.config(sequelize));
+  Cars.init(CarsSchema, Cars.config(sequelize));
 
 
   Category.associate(sequelize.models);
@@ -46,6 +49,7 @@ function setupModels(sequelize) {
   UnsoldProducts.associate(sequelize.models);
   Routes.associate(sequelize.models);
   ShiftOutput.associate(sequelize.models);
+  Cars.associate(sequelize.models);
 };
 
 module.exports = setupModels;

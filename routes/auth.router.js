@@ -11,6 +11,8 @@ passport.authenticate('local', {session: false}),
       const user = req.user
       const payload = {
         sub: user.id,
+        role: user.role,
+        image: user.image
       }
       const token = jwt.sign(payload, config.jwtSecret, {expiresIn: '5d'});
       res.json({
