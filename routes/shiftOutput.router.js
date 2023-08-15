@@ -6,6 +6,7 @@ const service = new ShiftOutputService();
 
 const validatorHandler = require('../middlewares/validator.handler');
 const { createShiftOutputSchema, getShiftOutputSchema, updateShiftOutputSchema, queryParamsSchema } = require('../schemas/shiftOutput.schema');
+const { checkRoles } = require('../middlewares/auth.handler');
 
 router.get('/',
   validatorHandler(queryParamsSchema, 'query'),
@@ -61,6 +62,7 @@ router.patch('/:id',
 );
 
 router.delete('/:id',
+  checkRoles(['owner', 'admin']) ,
   validatorHandler(getShiftOutputSchema, 'params'),
   async (req, res, next) => {
     try {

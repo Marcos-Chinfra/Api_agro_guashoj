@@ -9,7 +9,6 @@ const { createRouteSchema, updateRouteSchema, getRouteSchema } = require('../sch
 const { checkRoles } = require('../middlewares/auth.handler');
 
 router.get('/',
-  checkRoles(['owner', 'admin', 'worker']) ,
   async (req, res, next) => {
     try {
       const routes = await service.find();
@@ -20,7 +19,6 @@ router.get('/',
 });
 
 router.get('/:id',
-  checkRoles(['owner', 'admin', 'worker']) ,
   validatorHandler(getRouteSchema, 'params'),
   async (req, res, next) => {
     try {

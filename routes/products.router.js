@@ -11,7 +11,6 @@ const service = new ProductsServices();
 
 
 router.get('/',
-  checkRoles(['owner', 'admin', 'worker']) ,
   validatorHandler(queryParamsSchema, 'query'),
   async (req, res, next) => {
     try{
@@ -23,7 +22,6 @@ router.get('/',
 });
 
 router.get('/:id',
-  checkRoles(['owner', 'admin', 'worker']) ,
   validatorHandler(getProductSchema, 'params'),
     async (req, res, next) => {
       try{

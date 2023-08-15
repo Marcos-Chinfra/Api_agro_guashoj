@@ -5,7 +5,7 @@ const ProviderService = require('../services/provider.service');
 const service = new ProviderService();
 
 const validatorHandler = require('../middlewares/validator.handler');
-const { getProviderSchema, updateProviderSchema, createProviderSchema } = require('../schemas/provider.schema')
+const { getProviderSchema, updateProviderSchema, createProviderSchema } = require('../schemas/provider.schema');
 
 
 router.get('/',
