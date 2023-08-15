@@ -4,9 +4,9 @@ const router = express.Router();
 const ShiftOutputService = require('../services/shiftOutput.service');
 const service = new ShiftOutputService();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { createShiftOutputSchema, getShiftOutputSchema, updateShiftOutputSchema, queryParamsSchema } = require('../schemas/shiftOutput.schema');
-const { checkRoles } = require('../middlewares/auth.handler');
+const { checkRoles } = require('../api/middlewares/auth.handler');
 
 router.get('/',
   validatorHandler(queryParamsSchema, 'query'),

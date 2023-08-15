@@ -10,15 +10,6 @@ function checkApiKey(req, res, next){
   }
 };
 
-// function checkRole(req, res, next){
-//   console.log(req.user)
-//   const user = req.user;
-//   if(user.role === 'owner'){
-//     next();
-//   } else{
-//     next(boom.forbidden('se requieren permisos de administrador'))
-//   }
-// }
 
   function checkRoles(roles){
     return (req, res, next) => {

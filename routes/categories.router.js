@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { createCategorySchema, updateCategorySchema, getCategorySchema } = require('../schemas/category.schema');
-const { checkRoles } = require('../middlewares/auth.handler');
+const { checkRoles } = require('../api/middlewares/auth.handler');
 
 const CategoryService = require('../services/category.service');
 const service = new CategoryService();

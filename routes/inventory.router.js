@@ -4,7 +4,7 @@ const router = express.Router();
 const InventoryService = require('../services/inventory.service');
 const service = new InventoryService();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { createInventorySchema, updateInventorySchema, getInventorySchema } = require('../schemas/inventory.schema');
 
 router.get('/', async (req, res, next) => {

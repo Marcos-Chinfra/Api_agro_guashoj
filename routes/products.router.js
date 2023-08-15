@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { createProductSchema, updateProductSchema, getProductSchema, queryParamsSchema } = require('../schemas/products.schema');
-const { checkRoles } = require('../middlewares/auth.handler');
+const { checkRoles } = require('../api/middlewares/auth.handler');
 
 
 const ProductsServices = require('../services/products.service');

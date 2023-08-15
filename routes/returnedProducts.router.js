@@ -4,7 +4,7 @@ const router = express.Router();
 const ReturnedProductsService = require('../services/returnedProducts.service');
 const service = new ReturnedProductsService();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { createReturnedProductsSchema, updateReturnedProductsSchema, getReturnedProductsSchema, queryParamsSchema } = require('../schemas/returnedProducts.schema');
 
 router.get('/',

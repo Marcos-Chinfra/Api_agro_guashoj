@@ -4,7 +4,7 @@ const router = express.Router();
 const StaffService = require('../services/staff.service');
 const service = new StaffService();
 
-const validatorHandler = require('../middlewares/validator.handler.js');
+const validatorHandler = require('../api/middlewares/validator.handler.js');
 const { createStaffSchema, updateStaffSchema, getStaffSchema} = require('../schemas/staff.schema');
 
 router.get('/',

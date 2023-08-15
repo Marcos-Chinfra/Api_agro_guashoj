@@ -4,7 +4,7 @@ const router = express.Router();
 const SoldProductsService = require('../services/soldProducts.service');
 const service = new SoldProductsService();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { updateSoldProductsSchema, getSoldProductsSchema, createSoldProductsSchema, queryParamsSchema } = require('../schemas/soldProducts.schema');
 
 router.get('/',

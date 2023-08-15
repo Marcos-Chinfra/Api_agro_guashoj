@@ -4,7 +4,7 @@ const router = express.Router();
 const SupplyService = require('../services/supply.service');
 const service = new SupplyService();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { createSupplySchema, updateSupplySchema, getSupplySchema } = require('../schemas/supply.schema');
 
 router.get('/', async (req, res, next) => {

@@ -4,9 +4,9 @@ const router = express.Router();
 const RoutesService = require('../services/route.service');
 const service = new RoutesService();
 
-const validatorHandler = require('../middlewares/validator.handler');
+const validatorHandler = require('../api/middlewares/validator.handler');
 const { createRouteSchema, updateRouteSchema, getRouteSchema } = require('../schemas/routes.schema');
-const { checkRoles } = require('../middlewares/auth.handler');
+const { checkRoles } = require('../api/middlewares/auth.handler');
 
 router.get('/',
   async (req, res, next) => {
