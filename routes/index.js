@@ -1,7 +1,6 @@
 const express = require('express');
 
 const categoriesRouter = require('./categories.router');
-<<<<<<< HEAD:routes/index.js
 const inventoryRouter = require('./inventory.router');
 const productsRouter = require('./products.router');
 const providerRouter = require('./provider.router');
@@ -19,19 +18,10 @@ const carsRouter = require('./cars.router');
 const authRouter = require('./auth.router');
 const { checkApiKey, checkRoles } = require('../middlewares/auth.handler');
 const passport = require('passport');
-=======
-const ProviderRouter = require('./provider.router');
-const SalesRouter = require('./sales.router');
-const StaffRouter = require('./staff.router');
-const InventoryRouter = require('./inventory.router');
-const SoldProductsRouter = require('./soldProducts.router');
-const SupplyRouter = require('./supply.router');
->>>>>>> 0f4a8c54c79871b49a81e29503514f3763ce5ff9:api/routes/index.js
 
 
 function routerApi(app) {
   const router = express.Router();
-<<<<<<< HEAD:routes/index.js
   app.use('/api/v1', checkApiKey ,router);
   router.use('/categories', passport.authenticate('jwt', {session: false}),  categoriesRouter);
   router.use('/inventory', passport.authenticate('jwt', {session: false}), checkRoles(['owner', 'admin']) , inventoryRouter);
@@ -49,17 +39,6 @@ function routerApi(app) {
   router.use('/cars', passport.authenticate('jwt', {session: false}), checkRoles(['owner', 'admin']) , carsRouter);
   router.use('/users',  userRouter);
   router.use('/auth', authRouter);
-=======
-  app.use('/api/v1', router);
-  router.use('/products', productsRouter);
-  router.use('/categories', categoriesRouter);
-  router.use('/provider', ProviderRouter);
-  router.use('/sales', SalesRouter);
-  router.use('/staff', StaffRouter);
-  router.use('/inventory', InventoryRouter);
-  router.use('/sold_products', SoldProductsRouter);
-  router.use('/supplies', SupplyRouter)
->>>>>>> 0f4a8c54c79871b49a81e29503514f3763ce5ff9:api/routes/index.js
 }
 
 module.exports = routerApi;
