@@ -31,10 +31,6 @@ const ProductSchema = {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  image: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   unit_of_measurement:{
     type: DataTypes.STRING,
     allowNull: false

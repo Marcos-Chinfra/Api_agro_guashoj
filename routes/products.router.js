@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const validatorHandler = require('../api/middlewares/validator.handler');
+const validatorHandler = require('../middlewares/validator.handler');
 const { createProductSchema, updateProductSchema, getProductSchema, queryParamsSchema } = require('../schemas/products.schema');
-const { checkRoles } = require('../api/middlewares/auth.handler');
+const { checkRoles } = require('../middlewares/auth.handler');
 
 
 const ProductsServices = require('../services/products.service');
@@ -34,8 +34,9 @@ router.get('/:id',
   });
 
 router.post('/',
-checkRoles(['owner', 'admin']) ,
+  checkRoles(['owner', 'admin']) ,
   validatorHandler(createProductSchema, 'body'),
+
   async (req, res) => {
     const body = req.body;
     const newProduct = await service.create(body)

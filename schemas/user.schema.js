@@ -5,13 +5,11 @@ const name = Joi.string().min(8);
 const password = Joi.string().min(8);
 const phone = Joi.string().min(3).max(10);
 const role = Joi.string().min(4);
-const image = Joi.string().uri();
 
 const createUserSchema = Joi.object({
   name: name.required(),
   password: password.required(),
   phone: phone.required(),
-  image: image.required(),
   role: role
 });
 

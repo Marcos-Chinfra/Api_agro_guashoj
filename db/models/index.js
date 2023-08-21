@@ -1,5 +1,4 @@
 const { Category, CategorySchema } = require('./category.model');
-const { Customer, CustomerSchema } = require('./customer.model');
 const { Inventory, InventorySchema } = require('./inventory.model');
 const { Product, ProductSchema } = require('./products.model');
 const { Provider, ProviderSchema } = require('./providers.model');
@@ -19,7 +18,6 @@ const { User, UserSchema } = require('./user.model');
 
 function setupModels(sequelize) {
   Category.init(CategorySchema, Category.config(sequelize));
-  Customer.init(CustomerSchema, Customer.config(sequelize));
   Inventory.init(InventorySchema, Inventory.config(sequelize));
   Product.init(ProductSchema, Product.config(sequelize));
   Provider.init(ProviderSchema, Provider.config(sequelize));

@@ -23,10 +23,6 @@ const UserSchema = {
     allowNull: true,
     type: DataTypes.STRING,
   },
-  image: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   password: {
     allowNull: false,
     type: DataTypes.STRING

@@ -4,7 +4,7 @@ const router = express.Router();
 const StaffService = require('../services/staff.service');
 const service = new StaffService();
 
-const validatorHandler = require('../api/middlewares/validator.handler.js');
+const validatorHandler = require('../middlewares/validator.handler.js');
 const { createStaffSchema, updateStaffSchema, getStaffSchema} = require('../schemas/staff.schema');
 
 router.get('/',
@@ -36,6 +36,7 @@ router.post('/',
   async (req, res, next) => {
     try{
       const body = req.body;
+      console.log(body)
       const newStaff = await service.create(body);
       res.status(201).json(newStaff)
     }catch(err){

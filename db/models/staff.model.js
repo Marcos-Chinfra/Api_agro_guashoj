@@ -22,10 +22,6 @@ const StaffSchema = {
     allowNull: true,
     type: DataTypes.STRING,
   },
-  image: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
   role: {
     allowNull: false,
     type: DataTypes.STRING,

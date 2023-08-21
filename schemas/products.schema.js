@@ -17,7 +17,7 @@ const createProductSchema = Joi.object({
   weight: weight.required(),
   type: type.required(),
   unit_of_measurement: unit_of_measurement.required(),
-  categoryId: categoryId.required()
+  categoryId: categoryId.required(),
 });
 
 const updateProductSchema = Joi.object({
